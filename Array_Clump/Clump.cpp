@@ -5,7 +5,7 @@ Clump::Clump(int length){
 }
 
 Clump::~Clump(){
-	delete ptr;
+	delete[] &ptr;
 }
 
 void Clump::reallocate(){
@@ -24,6 +24,7 @@ void Clump::reallocate(){
 }
 
 bool Clump::insert(int value, int index){
+
 	if (index > ++elements) return false;
 	if (elements == length) reallocate();
 
@@ -35,6 +36,7 @@ bool Clump::insert(int value, int index){
 }
 
 bool Clump::remove(int index){
+
 	if (index > elements--) return false;
 	if (elements == length/2) reallocate();
 
