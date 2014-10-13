@@ -1,7 +1,11 @@
 #include "Clump.h"
 
+Clump::Clump(int length){
+	ptr = new int[length];
+}
+
 Clump::~Clump(){
-	delete[] data;
+	delete ptr;
 }
 
 void Clump::reallocate(){
@@ -15,8 +19,8 @@ void Clump::reallocate(){
 	}
 
 	//Delete data, then set data to the new array
-	delete[] data;
-	*ptr= *buffer;
+	delete[] &ptr;
+	ptr= buffer;
 }
 
 bool Clump::insert(int value, int index){
@@ -24,7 +28,7 @@ bool Clump::insert(int value, int index){
 	if (elements == length) reallocate();
 
 	for (int i = index; i <= elements; i++){
-		data[i + 1] = data[i];
+		*(ptr + i + 1) = *(ptr + i);
 	}
 
 	*(ptr + index) = value;

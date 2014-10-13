@@ -5,11 +5,11 @@ class Clump{
 	int length;
 	int elements = 0;
 
-	int data[1];
-	int * ptr = data;
+	int * ptr;
 	void reallocate();
 
 public:
+	Clump(int length = 1);
 	~Clump();
 
 	bool empty() { return elements = 0 ? true : false; }

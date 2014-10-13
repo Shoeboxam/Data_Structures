@@ -16,7 +16,7 @@ int main(){
 
 	Clump randoms;
 
-	for (int i = 0; i < 100; i++){
+	for (int i = 0; i < 75; i++){
 		randoms.append(generateValue(0, 100));
 	}
 
