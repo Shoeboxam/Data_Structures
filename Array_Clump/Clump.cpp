@@ -11,12 +11,12 @@ void Clump::reallocate(){
 
 	//Copy elements of data into new array
 	for (int i = 0; i <= length/2; i++){
-		buffer[i] = *data[i];
+		buffer[i] = *(ptr + i);
 	}
 
 	//Delete data, then set data to the new array
 	delete[] data;
-	*data = buffer;
+	*ptr= *buffer;
 }
 
 bool Clump::insert(int value, int index){
@@ -27,7 +27,7 @@ bool Clump::insert(int value, int index){
 		data[i + 1] = data[i];
 	}
 
-	data[index] = &value;
+	*(ptr + index) = value;
 }
 
 bool Clump::remove(int index){
@@ -35,20 +35,20 @@ bool Clump::remove(int index){
 	if (elements == length/2) reallocate();
 
 	for (; index < elements; index++){
-		*data[index] = *data[index + 1];
+		*(ptr + index) = *(ptr + index + 1);
 	}
 
-	delete data[index];
+	delete (ptr + index);
 }
 
 void Clump::fill(int value){
 	for (int i = 0; i <= elements; i++){
-		data[i] = &value;
+		*(ptr + i) = value;
 	}
 }
 
 void Clump::clear(){
 	for (int i = elements; i >= 0; i--){
-		delete data[i];
+		delete (ptr + i);
 	}
 }

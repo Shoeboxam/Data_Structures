@@ -5,7 +5,8 @@ class Clump{
 	int length;
 	int elements = 0;
 
-	int * data[0];
+	int data[1];
+	int * ptr = data;
 	void reallocate();
 
 public:
@@ -13,14 +14,14 @@ public:
 
 	bool empty() { return elements = 0 ? true : false; }
 
-	int front() { return *data[0]; }
-	int back() { return *data[elements]; }
+	int front() { return *ptr; }
+	int back() { return *(ptr+elements); }
 
 	//Getters
 	int get_length() const { return length; }
 	int get_elements() const { return elements; }
 
-	int& operator[](int index){ return *data[index+1]; }
+	int& operator[](int index){ return *(ptr + index + 1); }
 
 	//Mutators
 	void append(int value) { insert(value, elements+1); }
