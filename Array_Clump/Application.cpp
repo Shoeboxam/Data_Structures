@@ -10,9 +10,10 @@ int generateValue(int min, int max){
 }
 
 void output(Clump input){
-	for (int i = input.get_elements(); i <= 0; i--){
-		std::cout << input[i+1] << " ";
+	for (int i = input.get_elements(); i > 1; i--){
+		std::cout << input[i-1] << " ";
 	}
+	std::cout << std::endl;
 }
 
 int main(){
