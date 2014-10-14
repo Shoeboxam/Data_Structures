@@ -26,13 +26,14 @@ void Clump::reallocate(){
 bool Clump::insert(int value, int index){
 
 	if (index > elements) return false;
-	if (++elements >= length) reallocate();
+	if (elements >= length) reallocate();
 
-	for (int i = elements; i > index; i--){
-		ptr[i]= ptr[i-1];
+	for (int i = elements - 1; i > index; i--){
+		ptr[i+1]= ptr[i];
 	}
 
 	ptr[index] = value;
+	elements++;
 
 	return true;
 }
@@ -40,13 +41,14 @@ bool Clump::insert(int value, int index){
 bool Clump::remove(int index){
 
 	if (index > elements) return false;
-	if (--elements >= length/2) reallocate();
+	if (elements >= length/2) reallocate();
 
 	for (; index <= elements-1; index++){
 		ptr[index] = ptr[index+1];
 	}
 
 	ptr[index] = 0;
+	elements--;
 
 	return true;
 }
@@ -58,7 +60,7 @@ void Clump::fill(int value){
 }
 
 void Clump::clear(){
-	for (int i = elements; i >= 0; i--){
+	for (int i = elements - 1; i >= 0; i--){
 		ptr[i] = 0;
 	}
 	elements = 0;
@@ -75,7 +77,7 @@ void Clump::operator=(Clump input){
 	}
 }
 
-int& Clump::operator[](int index){
+int Clump::operator[](int index){
 	if (index >= elements || index < offset){
 		throw std::out_of_range("Error: index out of bounds");
 	}

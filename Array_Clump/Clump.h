@@ -15,7 +15,7 @@ class Clump{
 	bool offset = true;
 
 public:
-	Clump(bool mOffset = true);
+	Clump(bool mOffset = false);
 	~Clump();
 
 
@@ -39,7 +39,7 @@ public:
 	void clear();
 
 	void operator=(Clump input);
-	int& operator[](int index);
+	int operator[](int index);
 	bool operator==(Clump input);
 };
 
