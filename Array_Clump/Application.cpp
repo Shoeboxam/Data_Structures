@@ -10,7 +10,7 @@ int generateValue(int min, int max){
 }
 
 void output(Clump input){
-	for (int i = input.get_elements() - 1; i > 0; i--){
+	for (int i = 1; i < input.get_elements() - 1; i++){
 		std::cout << input[i] << " ";
 	}
 	std::cout << std::endl;
@@ -22,13 +22,16 @@ int main(){
 
 	Clump randoms(true);
 
-	for (int i = 0; i <= 5; i++){
+	for (int i = 0; i <= 8; i++){
 		randoms.append(generateValue(0, 100));
 	}
 
 	std::cout << "Random" << std::endl;
-	output(randoms); //This one runs fine
-	output(randoms); //This one corrupts the heap...
+	output(randoms);
+	randoms.append(4);
+	randoms.append(5);
+	randoms.append(6);
+	output(randoms);
 
 	system("pause");
 	return 0;

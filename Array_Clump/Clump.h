@@ -16,6 +16,7 @@ class Clump{
 
 public:
 	Clump(bool mOffset = false);
+	Clump(Clump& input);
 	~Clump();
 
 
@@ -27,6 +28,7 @@ public:
 	//Getters
 	int get_length() const { return length; }
 	int get_elements() const { return elements; }
+	bool is_offset() const { return offset; }
 
 	//Mutators
 	void append(int value) { insert(value, elements); }

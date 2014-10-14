@@ -4,6 +4,23 @@ Clump::Clump(bool mOffset){
 	offset = mOffset;
 }
 
+Clump::Clump(Clump& input){
+	offset = input.is_offset();
+	elements = input.get_elements();
+	length = input.get_length();
+	
+	delete[] ptr;
+
+
+	int * buffer = new int[length];
+
+	//Copy elements of data into new array
+	for (int i = offset; i < elements - 1; i++){
+		buffer[i] = input[i];
+	}
+	ptr = buffer;
+}
+
 Clump::~Clump(){
 	delete[] ptr;
 }
@@ -67,7 +84,7 @@ void Clump::clear(){
 }
 
 void Clump::operator=(Clump input){
-	delete[] & ptr;
+	delete[] ptr;
 	length = input.get_elements();
 	int * ptr = new int[length];
 
@@ -78,7 +95,7 @@ void Clump::operator=(Clump input){
 }
 
 int Clump::operator[](int index){
-	if (index >= elements || index < offset){
+	if (index > elements - 1 || index < offset){
 		throw std::out_of_range("Error: index out of bounds");
 	}
 
