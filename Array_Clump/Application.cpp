@@ -6,7 +6,6 @@
 #include "Clump.h"
 
 int generateValue(int min, int max){
-
 	return min + rand() % (max - min + 1);
 }
 
@@ -22,7 +21,7 @@ int main(){
 
 	Clump randoms;
 
-	for (int i = 0; i < 75; i++){
+	for (int i = 0; i < 100; i++){
 		randoms.append(generateValue(0, 100));
 	}
 

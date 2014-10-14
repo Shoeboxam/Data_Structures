@@ -8,7 +8,6 @@ class Clump{
 	int length;
 	int elements = 0;
 
-
 	int * ptr;
 	void reallocate();
 
@@ -40,10 +39,11 @@ public:
 
 	void operator=(Clump input){
 		delete[] &ptr;
-		int * ptr = new int[input.get_elements()];
+		length = input.get_elements();
+		int * ptr = new int[length];
 
 		//Copy elements of data into new array
-		for (int i = 0; i <= length; i++){
+		for (int i = 0; i < length; i++){
 			ptr[i] = input[i];
 		}
 	}
@@ -53,14 +53,14 @@ public:
 			throw std::out_of_range("Error: index out of bounds");
 		}
 
-		return *(ptr + index + offset);
+		return ptr[index+offset];
 	}
 
 	bool operator==(Clump input){
 		if (this->elements != input.get_elements()) return false;
 
 		for (int i = 0; i <= elements; i++){
-			if (*(ptr+i+offset) != input[i]) return false;
+			if (ptr[i+offset] != input[i]) return false;
 		}
 		return true;
 	}
