@@ -5,19 +5,19 @@ Clump::Clump(bool mOffset){
 }
 
 Clump::Clump(Clump& input){
+
 	offset = input.is_offset();
 	elements = input.get_elements();
 	length = input.get_length();
-	
-	delete[] ptr;
-
 
 	int * buffer = new int[length];
 
 	//Copy elements of data into new array
-	for (int i = offset; i < elements - 1; i++){
-		buffer[i] = input[i];
+	for (int i = 0; i < elements - 1; i++){
+		buffer[i] = input[i + offset];
 	}
+
+	delete[] ptr;
 	ptr = buffer;
 }
 
@@ -41,12 +41,20 @@ void Clump::reallocate(){
 }
 
 bool Clump::insert(int value, int index){
+	//Check if value is in range
+	if (index < offset || index > elements + offset) return false;
 
-	if (index > elements) return false;
+	//Map input to array indice
+	index -= offset;
+
+	//Ensure adequate space is available in array
 	if (elements >= length) reallocate();
 
-	for (int i = elements - 1; i > index; i--){
-		ptr[i+1]= ptr[i];
+	//Shift values forward one from the end to the insertion
+	if (elements > 0){
+		for (int i = elements + offset; i >= index; i--){
+			ptr[i] = ptr[i - 1];
+		}
 	}
 
 	ptr[index] = value;
@@ -56,6 +64,7 @@ bool Clump::insert(int value, int index){
 }
 
 bool Clump::remove(int index){
+	index -= offset;
 
 	if (index > elements) return false;
 	if (elements >= length/2) reallocate();
@@ -84,18 +93,21 @@ void Clump::clear(){
 }
 
 void Clump::operator=(Clump input){
+
 	delete[] ptr;
-	length = input.get_elements();
-	int * ptr = new int[length];
+
+
+	int * buffer = new int[length];
 
 	//Copy elements of data into new array
-	for (int i = 0; i < length; i++){
-		ptr[i] = input[i];
+	for (int i = offset; i < elements - 1; i++){
+		buffer[i] = input[i];
 	}
+	ptr = buffer;
 }
 
 int Clump::operator[](int index){
-	if (index > elements - 1 || index < offset){
+	if (index < offset || index > elements - !offset){
 		throw std::out_of_range("Error: index out of bounds");
 	}
 

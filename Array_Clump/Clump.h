@@ -22,7 +22,7 @@ public:
 
 	bool empty() { return elements == 0; }
 
-	int front() { return ptr[0]; }
+	int front() { return ptr[offset]; }
 	int back() { return ptr[elements - 1]; }
 
 	//Getters
@@ -31,8 +31,8 @@ public:
 	bool is_offset() const { return offset; }
 
 	//Mutators
-	void append(int value) { insert(value, elements); }
-	void prepend(int value) { insert(value, 0); }
+	void append(int value) { insert(value, elements + offset); }
+	void prepend(int value) { insert(value, offset); }
 
 	bool insert(int value, int index);
 	bool remove(int index);
