@@ -13,7 +13,7 @@ Clump::Clump(Clump& input){
 	int * buffer = new int[length];
 
 	//Copy elements of data into new array
-	for (int i = 0; i < elements - 1; i++){
+	for (int i = 0; i <= elements - 1; i++){
 		buffer[i] = input[i + offset];
 	}
 
@@ -93,16 +93,18 @@ void Clump::clear(){
 }
 
 void Clump::operator=(Clump input){
-
-	delete[] ptr;
-
+	offset = input.is_offset();
+	elements = input.get_elements();
+	length = input.get_length();
 
 	int * buffer = new int[length];
 
 	//Copy elements of data into new array
-	for (int i = offset; i < elements - 1; i++){
-		buffer[i] = input[i];
+	for (int i = 0; i <= elements - 1; i++){
+		buffer[i] = input[i + offset];
 	}
+
+	delete[] ptr;
 	ptr = buffer;
 }
 
@@ -115,10 +117,10 @@ int Clump::operator[](int index){
 }
 
 bool Clump::operator==(Clump input){
-	if (this->elements != input.get_elements()) return false;
+	if (elements != input.get_elements()) return false;
 
-	for (int i = 0; i <= elements; i++){
-		if (ptr[i + offset] != input[i]) return false;
+	for (int i = 0; i <= elements - 1; i++){
+		if (ptr[i] != input[i + input.is_offset()]) return false;
 	}
 	return true;
 }

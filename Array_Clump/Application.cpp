@@ -47,6 +47,28 @@ int main(){
 	randoms.remove(2);
 	output(randoms);
 
+	std::cout << std::endl << "Insert to index 2: " << std::endl;
+	randoms.insert(41, 2);
+	output(randoms);
+
+	std::cout << std::endl << "Front: " << randoms.front() << std::endl;
+	std::cout << std::endl << "Back: " << randoms.back() << std::endl;
+
+
+	Clump randoms2 = randoms;
+	std::cout << std::endl << "Clump == identical clump?  " << (randoms2==randoms) << std::endl;
+
+	randoms2.append(4);
+	std::cout << "Clump == modified clump?   " << (randoms2 == randoms) << std::endl;
+
+	std::cout << std::endl << "Fill with zeros: " << std::endl;
+	randoms.fill(0);
+	output(randoms);
+
+	std::cout << std::endl << "Clear: " << std::endl;
+	randoms.clear();
+	output(randoms);
+
 	system("pause");
 	return 0;
 }

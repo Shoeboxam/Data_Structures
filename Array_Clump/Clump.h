@@ -22,7 +22,7 @@ public:
 
 	bool empty() { return elements == 0; }
 
-	int front() { return ptr[offset]; }
+	int front() { return ptr[0]; }
 	int back() { return ptr[elements - 1]; }
 
 	//Getters
