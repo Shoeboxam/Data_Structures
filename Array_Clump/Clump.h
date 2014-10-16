@@ -4,11 +4,13 @@
 #include <iostream>
 #include <stdexcept>
 
+template<typename Type>
 class Clump{
 	int length = 1;
 	int elements = 0;
 
-	int * ptr = new int[length];
+	Type * ptr = new Type[length];
+
 	void reallocate();
 
 	//If true, numbering starts at 1
@@ -22,8 +24,8 @@ public:
 
 	bool empty() { return elements == 0; }
 
-	int front() { return ptr[0]; }
-	int back() { return ptr[elements - 1]; }
+	Type front() { return ptr[0]; }
+	Type back() { return ptr[elements - 1]; }
 
 	//Getters
 	int get_length() const { return length; }
@@ -31,18 +33,20 @@ public:
 	bool is_offset() const { return offset; }
 
 	//Mutators
-	void append(int value) { insert(value, elements + offset); }
-	void prepend(int value) { insert(value, offset); }
+	void append(Type value) { insert(value, elements + offset); }
+	void prepend(Type value) { insert(value, offset); }
 
-	bool insert(int value, int index);
+	bool insert(Type value, int index);
 	bool remove(int index);
 
-	void fill(int);
+	void fill(Type);
 	void clear();
 
 	void operator=(Clump input);
-	int operator[](int index);
+	Type operator[](int index);
 	bool operator==(Clump input);
 };
+
+#include "Clump.cpp"
 
 #endif

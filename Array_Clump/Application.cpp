@@ -9,7 +9,7 @@ int generateValue(int min, int max){
 	return min + rand() % (max - min + 1);
 }
 
-void output(Clump input){
+void output(Clump<int> input){
 	for (int i = input.is_offset(); i < input.get_elements() + input.is_offset(); i++){
 		std::cout << input[i] << " ";
 	}
@@ -20,7 +20,7 @@ int main(){
 	//Seed random number generator
 	srand(static_cast<int>(time(NULL)));
 
-	Clump randoms(true);
+	Clump<int> randoms(true);
 
 	for (int i = 0; i < 3; i++){
 		randoms.append(generateValue(0, 100));
@@ -55,7 +55,7 @@ int main(){
 	std::cout << std::endl << "Back: " << randoms.back() << std::endl;
 
 
-	Clump randoms2 = randoms;
+	Clump<int> randoms2 = randoms;
 	std::cout << std::endl << "Clump == identical clump?  " << (randoms2==randoms) << std::endl;
 
 	randoms2.append(4);

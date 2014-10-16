@@ -26,5 +26,8 @@
     <ClInclude Include="Clump.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="2D_Array.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,16 +1,17 @@
-#include "Clump.h"
 
-Clump::Clump(bool mOffset){
+template<typename Type>
+Clump<Type>::Clump(bool mOffset){
 	offset = mOffset;
 }
 
-Clump::Clump(Clump& input){
+template<typename Type>
+Clump<Type>::Clump(Clump& input){
 
 	offset = input.is_offset();
 	elements = input.get_elements();
 	length = input.get_length();
 
-	int * buffer = new int[length];
+	Type * buffer = new Type[length];
 
 	//Copy elements of data into new array
 	for (int i = 0; i <= elements - 1; i++){
@@ -21,14 +22,16 @@ Clump::Clump(Clump& input){
 	ptr = buffer;
 }
 
-Clump::~Clump(){
+template<typename Type>
+Clump<Type>::~Clump(){
 	delete[] ptr;
 }
 
-void Clump::reallocate(){
+template<typename Type>
+void Clump<Type>::reallocate(){
 	//Create new array with double length
 	length = elements * 2;
-	int * buffer = new int[length];
+	Type * buffer = new Type[length];
 
 	//Copy elements of data into new array
 	for (int i = 0; i <= length/2; i++){
@@ -40,7 +43,8 @@ void Clump::reallocate(){
 	ptr = buffer;
 }
 
-bool Clump::insert(int value, int index){
+template<typename Type>
+bool Clump<Type>::insert(Type value, int index){
 	//Check if value is in range
 	if (index < offset || index > elements + offset) return false;
 
@@ -63,7 +67,8 @@ bool Clump::insert(int value, int index){
 	return true;
 }
 
-bool Clump::remove(int index){
+template<typename Type>
+bool Clump<Type>::remove(int index){
 	index -= offset;
 
 	if (index > elements) return false;
@@ -79,25 +84,28 @@ bool Clump::remove(int index){
 	return true;
 }
 
-void Clump::fill(int value){
+template<typename Type>
+void Clump<Type>::fill(Type value){
 	for (int i = 0; i < elements; i++){
 		ptr[i] = value;
 	}
 }
 
-void Clump::clear(){
+template<typename Type>
+void Clump<Type>::clear(){
 	for (int i = elements - 1; i >= 0; i--){
 		ptr[i] = 0;
 	}
 	elements = 0;
 }
 
-void Clump::operator=(Clump input){
+template<typename Type>
+void Clump<Type>::operator=(Clump input){
 	offset = input.is_offset();
 	elements = input.get_elements();
 	length = input.get_length();
 
-	int * buffer = new int[length];
+	Type * buffer = new Type[length];
 
 	//Copy elements of data into new array
 	for (int i = 0; i <= elements - 1; i++){
@@ -108,7 +116,8 @@ void Clump::operator=(Clump input){
 	ptr = buffer;
 }
 
-int Clump::operator[](int index){
+template<typename Type>
+Type Clump<Type>::operator[](int index){
 	if (index < offset || index > elements - !offset){
 		throw std::out_of_range("Error: index out of bounds");
 	}
@@ -116,7 +125,8 @@ int Clump::operator[](int index){
 	return ptr[index - offset];
 }
 
-bool Clump::operator==(Clump input){
+template<typename Type>
+bool Clump<Type>::operator==(Clump input){
 	if (elements != input.get_elements()) return false;
 
 	for (int i = 0; i <= elements - 1; i++){
