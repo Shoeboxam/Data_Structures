@@ -10,7 +10,7 @@ int generateValue(int min, int max){
 }
 
 void output(Clump<int> input){
-	for (int i = input.is_offset(); i < input.get_elements() + input.is_offset(); i++){
+	for (int i = input.get_offset(); i < input.get_elements() + input.get_offset(); i++){
 		std::cout << input[i] << " ";
 	}
 	std::cout << std::endl;
@@ -22,15 +22,15 @@ int main(){
 
 	Clump<int> randoms(true);
 
-	for (int i = 0; i < 3; i++){
+	for (int i = 0; i < 100; i++){
 		randoms.append(generateValue(0, 100));
 	}
 
-	std::cout << std::endl << "Explicit output 1: " << randoms[randoms.is_offset()] << std::endl;
-	std::cout << "Explicit output 2: " << randoms[randoms.is_offset()+1] << std::endl;
-	std::cout << "Explicit output 3: " << randoms[randoms.is_offset()+2] << std::endl;
+	std::cout << std::endl << "Explicit output 1: " << randoms[randoms.get_offset()] << std::endl;
+	std::cout << "Explicit output 2: " << randoms[randoms.get_offset()+1] << std::endl;
+	std::cout << "Explicit output 3: " << randoms[randoms.get_offset()+2] << std::endl;
 
-	std::cout << "3 Random numbers: " << std::endl;
+	std::cout << "3 Random numbers (Copy constructor used): " << std::endl;
 	output(randoms);
 
 	std::cout << std::endl << "Prepend 785: " << std::endl;

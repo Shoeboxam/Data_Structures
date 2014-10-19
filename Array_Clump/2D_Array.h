@@ -4,7 +4,8 @@ class ClumpArray{
 	//Array of pointers to arrays of ints
 	Clump<Clump<int>> * ptr = new Clump<Clump<int>>[];
 
-	void reallocate();
+	void reallocate(int degree);
+
 public:
 	ClumpArray(bool offset = false);
 	ClumpArray(ClumpArray&);
@@ -16,5 +17,6 @@ public:
 	bool insert_row(int value, int index);
 	bool insert_column(int value, int index);
 
-	bool remove_row()
+	bool remove_row(int index);
+	bool remove_column(int index);
 };
