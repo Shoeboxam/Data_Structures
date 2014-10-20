@@ -30,23 +30,29 @@ int main(){
 	TestScores classroom;
 
 	for (int i = 0; i < 15; i++){
-		classroom.add_student(generate_vector(4));
+		cout << classroom.add_student(generate_vector(classroom.get_test_count()));
 	}
 
-	classroom.add_test(generate_vector(classroom.get_student_count()));
+	for (int i = 0; i < 5; i++){
+		cout << classroom.add_test(generate_vector(classroom.get_student_count()));
+	}
 
 	cout << "Print all tests: \n";
 	for (int elem : classroom.get_all_tests()){
 		cout << elem << ", ";
 	}
+	cout << classroom.get_student_count() << endl;
+	cout << classroom.get_test_count();
 
-	cout << "Print student 17's scores: \n";
-	for (int elem : classroom.get_student_scores(17)){
+	cout << "Print student 10's scores: \n";
+	for (int elem : classroom.get_student_scores(10)){
 		cout << elem << ", ";
 	}
 
+
 	cout << "Standard deviation of class: \n";
 	cout << classroom.get_standard_deviation() << endl;
+
 
 	system("pause");
 	return 0;

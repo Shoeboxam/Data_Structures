@@ -15,25 +15,25 @@ public:
 	float get_class_average() const;
 	float get_standard_deviation() const;
 
-	int get_test_count() { return Students.get_height(); }
 	int get_student_count() { return Students.get_width(); }
+	int get_test_count() { return Students.get_height(); }
 
 	vector<int> get_all_tests() { return Students.get(); }
 
 
-	bool add_student(vector<int> scores) { return student_id++, Students.append_column(scores); }
-	bool add_test(vector<int> scores) { return test_id++, Students.append_row(scores); }
+	bool add_student(vector<int> scores) { student_id++; return Students.append_column(scores); }
+	bool add_test(vector<int> scores) { test_id++; return Students.append_row(scores); }
 	
 };
 
 
 
-vector<int> TestScores::get_student_scores(int student_id) const{
-	return Students.get_column(student_id);
+vector<int> TestScores::get_student_scores(int mStudent_id) const{
+	return Students.get_column(mStudent_id);
 }
 
-float TestScores::get_student_average(int student_id) const{
-	return mathFilter.average(get_student_scores(student_id));
+float TestScores::get_student_average(int mStudent_id) const{
+	return mathFilter.average(get_student_scores(mStudent_id));
 }
 
 float TestScores::get_class_average() const{

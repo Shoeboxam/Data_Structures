@@ -26,13 +26,14 @@ class Clump{
 public:
 	Clump(){}
 	Clump(const Clump& input);
+	Clump(vector<Type> values, int mWidth, int mHeight);
 	~Clump();
 
 
-	bool empty() { return elements == 0; }
+	bool empty() { return get_elements() == 0; }
 
-	Type front() { return ptr[0]; }
-	Type back() { return ptr[elements - 1]; }
+	Type front() { return *ptr[0]; }
+	Type back() { return get(elem_width, elem_height); }
 
 	//Getters
 	Type& at(int x, int y);
@@ -44,8 +45,8 @@ public:
 
 
 	int get_length() const { return alloc_height * alloc_width; }
-
 	int get_elements() const { return elem_height * elem_width; }
+
 	int get_width() const { return elem_width; }
 	int get_height() const { return elem_height; }
 

@@ -3,6 +3,25 @@ Clump<Type>::Clump(const Clump& input){
 	this = input;
 }
 
+/*
+template<typename Type>
+Clump<Type>::Clump(vector<Type> values, int mWidth, int mHeight){
+
+	if (mWidth > 0 && mHeight > 0 && values.size() == mWidth * mHeight){
+
+		reallocate(mWidth, mHeight);
+		elem_width = mWidth;
+		elem_height = mHeight;
+
+		int i = 0;
+		for (int y = 0; y < elem_height; y++){
+			for (int x = 0; x < elem_width; x++){
+				ptr[y * alloc_width + x] = values[i++];
+			}
+		}
+	}
+}*/
+
 template<typename Type>
 Clump<Type>::~Clump(){
 	delete[] ptr;
@@ -14,7 +33,7 @@ Type Clump<Type>::at(int x, int y) const{
 	assert (x < elem_width && x >= 0);
 	assert (y < elem_height && y >= 0);
 
-	return ptr[x + y*alloc_width]; 
+	return *ptr[x + y*alloc_width]; 
 }
 
 template<typename Type>
@@ -39,7 +58,7 @@ vector<Type> Clump<Type>::get() const{
 
 template<typename Type>
 vector<Type> Clump<Type>::get_row(int index) const{
-	assert(index < elem_width && index >= 0);
+	if (index < elem_width && index >= 0) throw "Out of range!";
 
 	vector<Type> buffer;
 	for (int i = 0; i < elem_width; i++){
@@ -50,7 +69,7 @@ vector<Type> Clump<Type>::get_row(int index) const{
 
 template<typename Type>
 vector<Type> Clump<Type>::get_column(int index) const{
-	assert(index < elem_height && index >= 0);
+	if (index < elem_height && index >= 0) throw "Out of range!";;
 
 	vector<Type> buffer;
 	for (int i = 0; i < elem_height; i++){
@@ -68,7 +87,7 @@ void Clump<Type>::reallocate(int width_diff, int height_diff){
 	//For any reason, if reallocation would truncate values, then return
 	if (new_width < elem_width || new_height < elem_height) return;
 
-	Type * buffer = new Type[new_width * new_height];
+	Type * buffer = new Type[(new_width * new_height)];
 
 	//Copy elements of data into new array
 	for (int x = 0; x < alloc_width; x++){
@@ -99,19 +118,19 @@ bool Clump<Type>::insert_row(vector<Type> value, int index){
 
 	//Shift values forward one from the end to the insertion on every column
 	if (elem_height > 0){
-		for (int x = elem_width; x >= index; x--){
-			for (int y = elem_height; x >= 0; y--){
-				ptr[x * elem_width + y] = ptr[(x - 1) * elem_width + y];
+		for (int y = elem_height; y > index; y--){
+			for (int x = 0; x < elem_width; x++){
+				ptr[y * alloc_width + x] = ptr[(y - 1) * alloc_width + x];
 			}
 		}
 	}
 
 	//Assign input vector to array
-	for (int i = alloc_width * index; i < alloc_width * (index + 1); i++){
-		ptr[i] = value[i / alloc_width];
+	for (int x = 0; x < value.size(); x++){
+		ptr[index * alloc_width + x] = value[x];
 	}
 
-	elem_height += value.size();
+	elem_height++;
 
 	return true;
 }
@@ -126,23 +145,23 @@ bool Clump<Type>::insert_column(vector<Type> value, int index){
 	if (index < 0 || index > elem_width) return false;
 
 	//Ensure adequate space is available in array
-	if (elem_width + 1 >= alloc_width) reallocate(alloc_buffer * value.size(), 0);
+	if (elem_width >= alloc_width) reallocate(alloc_buffer * value.size(), 0);
 
 	//Shift values forward one from the end to the insertion on every column
 	if (elem_width > 0){
-		for (int y = elem_height; y >= 0; y--){
-			for (int x = elem_width; x >= index; x--){
+		for (int y = elem_height - 1; y >= 0; y--){
+			for (int x = index + 1; x < elem_width; x++){
 				ptr[x + y * elem_width] = ptr[(x - 1) + y * elem_width];
 			}
 		}
 	}
 
 	//Assign input vector to array
-	for (int i = index; i < get_length(); i += alloc_width){
-		ptr[i] = value[(i - index) / alloc_width];
+	for (int y = 0; y < value.size(); y++){
+		ptr[index + y * alloc_width] = value[y];
 	}
 
-	elem_width += value.size();
+	elem_width++;
 
 	return true;
 }
