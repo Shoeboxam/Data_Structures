@@ -10,24 +10,21 @@ using std::vector;
 
 template<typename Type>
 class Clump{
-	int alloc_width = 1
+	int alloc_width = 1;
 	int alloc_height = 1;
 
 	int elem_width = 0;
 	int elem_height = 0;
 
-	Type * ptr = new Type[length];
+	Type * ptr = new Type[get_length()];
 
 	void reallocate(int width_diff, int height_diff);
 
-	//If true, numbering starts at 1
-	bool offset = true;
-
-	//Higher = greater allocation size, fewer reallocations upon insertion
+	//Higher = greater allocation size, fewer reallocations
 	int alloc_buffer = 2;
 
 public:
-	Clump(bool mOffset = false);
+	Clump(){}
 	Clump(Clump& input);
 	~Clump();
 
@@ -38,9 +35,13 @@ public:
 	Type back() { return ptr[elements - 1]; }
 
 	//Getters
-	Type get(int x, int y);
+	Type& at(int x, int y);
+	Type at(int x, int y) const;
+
+	vector<Type> get() const;
 	vector<Type> get_row(int index) const;
 	vector<Type> get_column(int index) const;
+
 
 	int get_length() const { return alloc_height * alloc_width; }
 
@@ -48,27 +49,27 @@ public:
 	int get_width() const { return elem_width; }
 	int get_height() const { return elem_height; }
 
-	bool is_offset() const { return offset; }
-
 	//Mutators
-	void append_row(vector<Type> value) { insert(value, get_width() + offset); }
-	void append_column(vector<Type> value) { insert(value, get_height() + offset); }
+	bool append_row(vector<Type> value) { return insert_row(value, get_width()); }
+	bool append_column(vector<Type> value) { return insert_column(value, get_height()); }
 
-	void prepend_row(vector<Type> value) { insert(value, offset); }
-	void prepend_column(vector<Type> value) { insert(value, offset); }
+	bool prepend_row(vector<Type> value) { return insert_row(value, 0); }
+	bool prepend_column(vector<Type> value) { return insert_column(value, 0); }
 
-	void insert_row(vector<Type> value, int index);
-	void insert_column(vector<Type> value, int index);
+	bool insert_row(vector<Type> value, int index);
+	bool insert_column(vector<Type> value, int index);
 
-	void remove_row(int index);
-	void remove_column(int index);
+	bool remove_row(int index);
+	bool remove_column(int index);
 
 	void fill(Type);
 	void clear();
 
 	void operator=(Clump input);
 	bool operator==(Clump input) const;
-	Type operator()(int x, int y) const { return ptr[x + y*alloc_width]; }
+
+	Type& operator()(int x, int y) { return at(x, y); }
+	Type operator()(int x, int y) const { return at(x, y); }
 };
 
 #include "Clump.cpp"

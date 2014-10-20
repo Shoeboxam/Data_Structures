@@ -1,13 +1,6 @@
-
-template<typename Type>
-Clump<Type>::Clump(bool mOffset){
-	offset = mOffset;
-}
-
 template<typename Type>
 Clump<Type>::Clump(Clump& input){
 
-	offset = input.is_offset();
 	elements = input.get_elements();
 	width = input.get_width();
 	height = input.get_height();
@@ -17,7 +10,7 @@ Clump<Type>::Clump(Clump& input){
 	//Copy elements of data into new array
 
 	for (int i = 0; i <= input.; i++){
-		buffer[i] = input[i + offset];
+		buffer[i] = input[i];
 	}
 
 	delete[] ptr;
@@ -30,7 +23,7 @@ Clump<Type>::~Clump(){
 }
 
 template<typename Type>
-Type Clump<Type>::get(int x, int y){
+Type Clump<Type>::at(int x, int y) const{
 	//Bounds checking
 	assert (x < elem_width && x >= 0);
 	assert (y < elem_height && y >= 0);
@@ -38,9 +31,28 @@ Type Clump<Type>::get(int x, int y){
 	return ptr[x + y*alloc_width]; 
 }
 
+template<typename Type>
+Type& Clump<Type>::at(int x, int y){
+	//Bounds checking
+	assert(x < elem_width && x >= 0);
+	assert(y < elem_height && y >= 0);
+
+	return &ptr[x + y*alloc_width];
+}
 
 template<typename Type>
-vector<Type> Clump<Type>::get_row(int index){
+vector<Type> Clump<Type>::get() const{
+	vector<Type> buffer;
+	for (int y = 0; y < elem_height; y++){
+		for (int x = 0; x < elem_width; x++){
+			buffer.push_back(ptr[x + y * alloc_width]);
+		}
+	}
+	return buffer;
+}
+
+template<typename Type>
+vector<Type> Clump<Type>::get_row(int index) const{
 	assert(index < elem_width && index >= 0);
 
 	vector<Type> buffer;
@@ -51,12 +63,12 @@ vector<Type> Clump<Type>::get_row(int index){
 }
 
 template<typename Type>
-vector<Type> Clump<Type>::get_column(int index){
+vector<Type> Clump<Type>::get_column(int index) const{
 	assert(index < elem_height && index >= 0);
 
 	vector<Type> buffer;
 	for (int i = 0; i < elem_height; i++){
-		buffer.push_back(ptr[index + alloc_width * i])
+		buffer.push_back(ptr[index + alloc_width * i]);
 	}
 	return buffer;
 }
@@ -88,24 +100,21 @@ void Clump<Type>::reallocate(int width_diff, int height_diff){
 }
 
 template<typename Type>
-void Clump<Type>::insert_row(vector<Type> value, int index){
+bool Clump<Type>::insert_row(vector<Type> value, int index){
 
 	//Ensure vector is correct length for insertion
-	assert (value.size() == elem_width);
+	if (value.size() != elem_width) return false;
 
 	//Check if index is in range
-	assert (index >= offset && index <= elements + offset);
-
-	//Map input to array indice
-	index -= offset;
+	if (index < 0 || index > elem_height) return false;
 
 	//Ensure adequate space is available in array
-	if (alloc_height >= length) reallocate(0, alloc_buffer * value.size());
+	if (elem_height >= alloc_height) reallocate(0, alloc_buffer * value.size());
 
 	//Shift values forward one from the end to the insertion on every column
 	if (elem_height > 0){
-		for (int x = elem_width + offset; x >= index; x--){
-			for (int y = elem_height + offset; x >= offset; y--){
+		for (int x = elem_width; x >= index; x--){
+			for (int y = elem_height; x >= 0; y--){
 				ptr[x * elem_width + y] = ptr[(x - 1) * elem_width + y];
 			}
 		}
@@ -116,28 +125,27 @@ void Clump<Type>::insert_row(vector<Type> value, int index){
 		ptr[i] = value[i / alloc_width];
 	}
 
-	elements += value.size();
+	elem_height += value.size();
+
+	return true;
 }
 
 template<typename Type>
-void Clump<Type>::insert_column(vector<Type> value, int index){
+bool Clump<Type>::insert_column(vector<Type> value, int index){
 
 	//Ensure vector is correct length for insertion
-	assert (value.size() == elem_height);
+	if (value.size() != elem_height) return false;
 
 	//Check if index is in range
-	assert(index >= offset && index <= elements + offset);
-
-	//Map input to array indice
-	index -= offset;
+	if (index < 0 || index > elem_width) return false;
 
 	//Ensure adequate space is available in array
-	if (alloc_width >= length) reallocate(alloc_buffer * value.size(), 0);
+	if (elem_width + 1 >= alloc_width) reallocate(alloc_buffer * value.size(), 0);
 
 	//Shift values forward one from the end to the insertion on every column
 	if (elem_width > 0){
-		for (int y = elem_height + offset; x >= offset; y--){
-			for (int x = elem_width + offset; x >= index; x--){
+		for (int y = elem_height; y >= 0; y--){
+			for (int x = elem_width; x >= index; x--){
 				ptr[x + y * elem_width] = ptr[(x - 1) + y * elem_width];
 			}
 		}
@@ -148,14 +156,15 @@ void Clump<Type>::insert_column(vector<Type> value, int index){
 		ptr[i] = value[(i - index) / alloc_width];
 	}
 
-	elements += value.size();
+	elem_width += value.size();
+
+	return true;
 }
 
 template<typename Type>
-void Clump<Type>::remove_row(int index){
-	index -= offset;
+bool Clump<Type>::remove_row(int index){
 
-	assert (index < elem_height);
+	if (index >= elem_height) return false;
 
 	//Shrink data structure if it is too large
 	if (elem_height < alloc_height - alloc_buffer) reallocate(0, -alloc_buffer * alloc_height);
@@ -175,13 +184,14 @@ void Clump<Type>::remove_row(int index){
 	}
 	
 	elem_height--;
+
+	return true;
 }
 
 template<typename Type>
-void Clump<Type>::remove_column(int index){
-	index -= offset;
+bool Clump<Type>::remove_column(int index){
 
-	assert(index < elem_width);
+	if (index >= elem_width) return false;
 
 	//Shrink data structure if it is too large
 	if (elem_width < alloc_width - alloc_buffer) reallocate(-alloc_buffer * alloc_width, 0);
@@ -201,6 +211,8 @@ void Clump<Type>::remove_column(int index){
 	}
 
 	elem_height--;
+
+	return true;
 }
 
 template<typename Type>
@@ -223,7 +235,6 @@ void Clump<Type>::clear(){
 
 template<typename Type>
 void Clump<Type>::operator=(Clump input){
-	offset = input.is_offset();
 	elements = input.get_elements();
 	length = input.get_length();
 
@@ -231,7 +242,7 @@ void Clump<Type>::operator=(Clump input){
 
 	//Copy elements of data into new array
 	for (int i = 0; i <= elements - 1; i++){
-		buffer[i] = input[i + offset];
+		buffer[i] = input[i];
 	}
 
 	delete[] ptr;
@@ -239,11 +250,11 @@ void Clump<Type>::operator=(Clump input){
 }
 
 template<typename Type>
-bool Clump<Type>::operator==(Clump input){
+bool Clump<Type>::operator==(Clump input) const{
 	if (elements != input.get_elements()) return false;
 
 	for (int i = 0; i <= elements - 1; i++){
-		if (ptr[i] != input[i + input.is_offset()]) return false;
+		if (ptr[i] != input[i]) return false;
 	}
 	return true;
 }

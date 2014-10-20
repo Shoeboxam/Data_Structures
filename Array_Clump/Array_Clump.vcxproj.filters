@@ -26,7 +26,10 @@
     <ClInclude Include="Clump.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="2D_Array.h">
+    <ClInclude Include="Filter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScores.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

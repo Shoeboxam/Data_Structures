@@ -82,8 +82,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="2D_Array.h" />
     <ClInclude Include="Clump.h" />
+    <ClInclude Include="Filter.h" />
+    <ClInclude Include="TestScores.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
