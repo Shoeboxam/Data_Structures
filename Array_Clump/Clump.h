@@ -38,6 +38,10 @@ public:
 	Type back() { return ptr[elements - 1]; }
 
 	//Getters
+	Type get(int x, int y);
+	vector<Type> get_row(int index) const;
+	vector<Type> get_column(int index) const;
+
 	int get_length() const { return alloc_height * alloc_width; }
 
 	int get_elements() const { return elem_height * elem_width; }
@@ -63,7 +67,8 @@ public:
 	void clear();
 
 	void operator=(Clump input);
-	bool operator==(Clump input);
+	bool operator==(Clump input) const;
+	Type operator()(int x, int y) const { return ptr[x + y*alloc_width]; }
 };
 
 #include "Clump.cpp"

@@ -30,6 +30,38 @@ Clump<Type>::~Clump(){
 }
 
 template<typename Type>
+Type Clump<Type>::get(int x, int y){
+	//Bounds checking
+	assert (x < elem_width && x >= 0);
+	assert (y < elem_height && y >= 0);
+
+	return ptr[x + y*alloc_width]; 
+}
+
+
+template<typename Type>
+vector<Type> Clump<Type>::get_row(int index){
+	assert(index < elem_width && index >= 0);
+
+	vector<Type> buffer;
+	for (int i = 0; i < elem_width; i++){
+		buffer.push_back(ptr[index * alloc_width + i])
+	}
+	return buffer;
+}
+
+template<typename Type>
+vector<Type> Clump<Type>::get_column(int index){
+	assert(index < elem_height && index >= 0);
+
+	vector<Type> buffer;
+	for (int i = 0; i < elem_height; i++){
+		buffer.push_back(ptr[index + alloc_width * i])
+	}
+	return buffer;
+}
+
+template<typename Type>
 void Clump<Type>::reallocate(int width_diff, int height_diff){
 	//Create new array with multiplied true dimensions
 	int new_width = alloc_width + width_diff;
