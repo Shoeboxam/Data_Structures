@@ -1,20 +1,6 @@
 template<typename Type>
-Clump<Type>::Clump(Clump& input){
-
-	elements = input.get_elements();
-	width = input.get_width();
-	height = input.get_height();
-
-	Type * buffer = new Type[get_length()];
-
-	//Copy elements of data into new array
-
-	for (int i = 0; i <= input.; i++){
-		buffer[i] = input[i];
-	}
-
-	delete[] ptr;
-	ptr = buffer;
+Clump<Type>::Clump(const Clump& input){
+	this = input;
 }
 
 template<typename Type>
@@ -234,15 +220,22 @@ void Clump<Type>::clear(){
 }
 
 template<typename Type>
-void Clump<Type>::operator=(Clump input){
-	elements = input.get_elements();
-	length = input.get_length();
+void Clump<Type>::operator=(const Clump &input){
+	int alloc_width = input.alloc_width;
+	int alloc_height = input.alloc_height;
 
-	Type * buffer = new Type[length];
+	int elem_width = input.elem_width;
+	int elem_height = input.elem_height;
+
+	int alloc_buffer = input.alloc_buffer;
+
+	Type * buffer = new Type[get_length()];
 
 	//Copy elements of data into new array
-	for (int i = 0; i <= elements - 1; i++){
-		buffer[i] = input[i];
+	for (int y = 0; y < elem_height; y++){
+		for (int x = 0; x < elem_width; x++){
+			buffer[x + y * alloc_width] = ptr[x + y * alloc_width];
+		}
 	}
 
 	delete[] ptr;

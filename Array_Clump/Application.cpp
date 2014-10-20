@@ -17,7 +17,7 @@ vector<int> generate_vector(int length){
 	vector<int> buffer;
 
 	for (int i = 0; i < length; i++){
-		buffer.push_back(generateValue(0, 100));
+		buffer.push_back(generateValue(45, 100));
 	}
 
 	return buffer;
@@ -29,12 +29,11 @@ int main(){
 
 	TestScores classroom;
 
-	for (int i = 0; i < 25; i++){
+	for (int i = 0; i < 15; i++){
 		classroom.add_student(generate_vector(4));
 	}
 
 	classroom.add_test(generate_vector(classroom.get_student_count()));
-
 
 	cout << "Print all tests: \n";
 	for (int elem : classroom.get_all_tests()){

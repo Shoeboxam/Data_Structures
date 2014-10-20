@@ -25,7 +25,7 @@ class Clump{
 
 public:
 	Clump(){}
-	Clump(Clump& input);
+	Clump(const Clump& input);
 	~Clump();
 
 
@@ -65,7 +65,7 @@ public:
 	void fill(Type);
 	void clear();
 
-	void operator=(Clump input);
+	void operator=(const Clump &input);
 	bool operator==(Clump input) const;
 
 	Type& operator()(int x, int y) { return at(x, y); }
