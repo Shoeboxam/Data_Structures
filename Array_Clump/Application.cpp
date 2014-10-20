@@ -16,15 +16,23 @@ void output(Clump<int> input){
 	std::cout << std::endl;
 }
 
+vector<int> generate_vector(int length){
+	vector<int> buffer;
+
+	for (int i = 0; i < length; i++){
+		buffer.push_back(generateValue(0, 100));
+	}
+
+	return buffer;
+}
+
 int main(){
 	//Seed random number generator
 	srand(static_cast<int>(time(NULL)));
 
 	Clump<int> randoms(true);
 
-	for (int i = 0; i < 3; i++){
-		randoms.append(generateValue(0, 100));
-	}
+	randoms.append_column(generate_vector(randoms.get_height()));
 
 	std::cout << std::endl << "Explicit output 1: " << randoms[randoms.is_offset()] << std::endl;
 	std::cout << "Explicit output 2: " << randoms[randoms.is_offset()+1] << std::endl;
