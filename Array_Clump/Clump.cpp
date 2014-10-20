@@ -32,6 +32,17 @@ Clump<Type>::~Clump(){
 }
 
 template<typename Type>
+Type Clump<Type>::get(vector<int> coordinate){
+	int index = 0;
+	for (int i = 0; i < coordinate.size(), i++){
+		if (coordinate[i] >= length[i] || coordinate[i] < 0) { return false; }
+
+		index += ptr[length[i] * coordinate[i]];
+	}
+	return ptr[index];
+}
+
+template<typename Type>
 bool Clump<Type>::set_buffer(int mBuffer){
 	return mBuffer < 0 ? return false : (buffer = mBuffer, return true);
 }
@@ -48,6 +59,11 @@ int Clump<Type>::index_expansion(vector<int> coordinate){
 		index += point * length[dim];
 	}
 	return index;
+}
+
+template<typename Type>
+Clump<Type> Clump<Type>::traverse(Clump<Type> value){
+	for (int i = 0; i <)
 }
 
 //Point validation
@@ -102,6 +118,7 @@ void Clump<Type>::reallocate(int degree, int growth){
 	ptr = buffer;
 }
 
+//TODO: Insertion should accept Clumps compatible with child dimensions
 template<typename Type>
 bool Clump<Type>::insert(Type value, vector<int> coordinate){
 	//NOTE: Insertion of >1D array bucket fills all child dimensions
@@ -114,19 +131,23 @@ bool Clump<Type>::insert(Type value, vector<int> coordinate){
 	if (index < offset || index > elements + offset) { return false; }
 
 	//Map input to array indice
-	index -= offset;
+	index -= offset; //TODO: Should I power offset with dimensions? Or just in the getter?
 
 	//Ensure adequate space is available in array
-	for (int dim = 0; dim < coordinate.size(); dim++){
-		if (elements[dim] >= length[dim]) { 
-			reallocate(coordinate[dim], 1); 
-		}
+	if (elements.front() >= length.front()) { 
+		reallocate(coordinate[dim], 1); 
 	}
 
 	//TODO: dimensional shifting
 	//Shift values forward one from the end to the insertion
-	if (elements > 0){
-		for (int i = elements + offset; i >= index; i--){
+	//for (int dim = 0; dim < coordinate.size(); dim++){
+	if (elements.back() > 0){
+		for (int dim = 1; dim < dimensions; dim++){
+			for (int i = elements[dim]; i >= 0; i--){
+				ptr[i + length[dim]]
+			}
+		}
+		for (int i = elements.back() + offset; i >= index; i--){
 			ptr[i] = ptr[i - 1];
 		}
 	}
@@ -196,6 +217,20 @@ bool Clump<Type>::remove(int index){
 }
 
 template<typename Type>
+bool Clump<Type>::assign(Clump<Type> value, vector<int> coordinate){
+	if (!valid_coordinate(coordinate)) { return false; }
+	if (value.get_dimensions() + coordinate.size() != dimensions) { return false; }
+
+	Type * buffer = new Type[index_expand(length)];
+
+	for (int dim = 1; dim <= value.get_dimensions(); dim++){	//Y
+		for (int i = 0; i < value.get_length(dim); i++){		//X
+			ptr[i + dim * length[dim]] = value.get();
+		}
+	}
+}
+
+template<typename Type>
 void Clump<Type>::fill(Type value){
 	for (int i = 0; i < elements; i++){
 		ptr[i] = value;
@@ -225,15 +260,6 @@ void Clump<Type>::operator=(Clump input){
 
 	delete[] ptr;
 	ptr = buffer;
-}
-
-template<typename Type>
-Type Clump<Type>::operator[](int index){
-	if (index < offset || index > elements - !offset){
-		throw std::out_of_range("Error: index out of bounds");
-	}
-
-	return ptr[index - offset];
 }
 
 template<typename Type>
