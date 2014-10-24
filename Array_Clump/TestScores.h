@@ -14,6 +14,8 @@ public:
 	float get_student_average(int mStudent_id) const;
 	float get_class_average() const;
 	float get_standard_deviation() const;
+	vector<int> get_bandpass(int min, int max) const;
+
 
 	int get_student_count() { return Students.get_width(); }
 	int get_test_count() { return Students.get_height(); }
@@ -42,4 +44,8 @@ float TestScores::get_class_average() const{
 
 float TestScores::get_standard_deviation() const{
 	return mathFilter(Students.get());
+}
+
+vector<int> TestScores::get_bandpass(int min, int max) const{
+	return mathFilter.get_bandpass(Students.get(), min, max);
 }

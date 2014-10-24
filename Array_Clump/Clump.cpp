@@ -33,7 +33,7 @@ Type Clump<Type>::at(int x, int y) const{
 	assert (x < elem_width && x >= 0);
 	assert (y < elem_height && y >= 0);
 
-	return *ptr[x + y*alloc_width]; 
+	return ptr[x + y*alloc_width]; 
 }
 
 template<typename Type>
@@ -42,7 +42,7 @@ Type& Clump<Type>::at(int x, int y){
 	assert(x < elem_width && x >= 0);
 	assert(y < elem_height && y >= 0);
 
-	return &ptr[x + y*alloc_width];
+	return ptr[x + y*alloc_width];
 }
 
 template<typename Type>
@@ -118,8 +118,8 @@ bool Clump<Type>::insert_row(vector<Type> value, int index){
 
 	//Shift values forward one from the end to the insertion on every column
 	if (elem_height > 0){
-		for (int y = elem_height; y > index; y--){
-			for (int x = 0; x < elem_width; x++){
+		for (int x = 0; x < elem_width; x++){
+			for (int y = elem_height; y > index; y--){
 				ptr[y * alloc_width + x] = ptr[(y - 1) * alloc_width + x];
 			}
 		}
@@ -147,7 +147,7 @@ bool Clump<Type>::insert_column(vector<Type> value, int index){
 	//Ensure adequate space is available in array
 	if (elem_width >= alloc_width) reallocate(alloc_buffer * value.size(), 0);
 
-	//Shift values forward one from the end to the insertion on every column
+	//Shift values forward one from the end to the insertion on every row
 	if (elem_width > 0){
 		for (int y = elem_height - 1; y >= 0; y--){
 			for (int x = index + 1; x < elem_width; x++){

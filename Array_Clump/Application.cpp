@@ -30,19 +30,20 @@ int main(){
 	TestScores classroom;
 
 	for (int i = 0; i < 15; i++){
-		cout << classroom.add_student(generate_vector(classroom.get_test_count()));
+		classroom.add_student(generate_vector(classroom.get_test_count()));
 	}
 
 	for (int i = 0; i < 5; i++){
-		cout << classroom.add_test(generate_vector(classroom.get_student_count()));
+		classroom.add_test(generate_vector(classroom.get_student_count()));
 	}
 
 	cout << "Print all tests: \n";
-	for (int elem : classroom.get_all_tests()){
-		cout << elem << ", ";
+	vector<int> buffer = classroom.get_all_tests();
+	for (int i = 0; i < buffer.size(); i++){
+		cout << buffer[i] << ", ";
 	}
-	cout << classroom.get_student_count() << endl;
-	cout << classroom.get_test_count();
+
+	cout << "Student count: " << classroom.get_student_count() << " Test count: " << classroom.get_test_count() << endl;
 
 	cout << "Print student 10's scores: \n";
 	for (int elem : classroom.get_student_scores(10)){
