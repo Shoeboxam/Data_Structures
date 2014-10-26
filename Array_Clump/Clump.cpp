@@ -1,5 +1,6 @@
 template<typename Type>
 Clump<Type>::Clump(bool mOffset, int mDimensions){
+	offset = mOffset;
 	if (mDimensions > 0) { dimensions = mDimensions; }
 
 	for (int i = 0; i < dimensions; i++){
@@ -43,6 +44,15 @@ Type Clump<Type>::get(vector<int> coordinate){
 }
 
 template<typename Type>
+int Clump<Type>::get_elements() const {
+	int components = 0;
+	for (int dim = 0; dim < dimensions; dim++){
+		components += pow(elements[dim], components);
+	}
+	return components;
+}
+
+template<typename Type>
 bool Clump<Type>::set_buffer(int mBuffer){
 	return mBuffer < 0 ? return false : (buffer = mBuffer, return true);
 }
@@ -61,9 +71,28 @@ int Clump<Type>::index_expansion(vector<int> coordinate){
 	return index;
 }
 
+//Useful for deep copy
 template<typename Type>
-Clump<Type> Clump<Type>::traverse(Clump<Type> value){
-	for (int i = 0; i <)
+vector<Type> Clump<Type>::traverse(){
+	vector<Type> traversal;
+	vector<int> coordinates;
+	for (int i = 0; i < dimensions; i++){
+		coordinates.push_back(0);
+	}
+	
+	vector<Type> recurse(int dim){
+		for (int dim = 0; dim < dimensions; dim++){
+			for (int i = 0; i < length[dim]; i++){
+
+				coordinates[dim] = i;
+				traversal.push_back(get(coordinates));
+
+				recurse(dim);
+			}
+		}
+	}
+
+	return recurse(dimensions, vector<int>);
 }
 
 //Point validation
@@ -120,7 +149,7 @@ void Clump<Type>::reallocate(int degree, int growth){
 
 //TODO: Insertion should accept Clumps compatible with child dimensions
 template<typename Type>
-bool Clump<Type>::insert(Type value, vector<int> coordinate){
+bool Clump<Type>::insert(vector<Type> value, vector<int> coordinate){
 	//NOTE: Insertion of >1D array bucket fills all child dimensions
 	//IE: Inserting five @ dimension 4 of 7 bucket fills five in the newly created child rows in dimensions 4, 5, 6 and 7
 
@@ -153,48 +182,7 @@ bool Clump<Type>::insert(Type value, vector<int> coordinate){
 	}
 
 	ptr[index] = value;
-	elements++;
-
-	return true;
-}
-
-//Cover for simpler insertion on 1D arrays
-template<typename Type>
-bool Clump<Type>::insert(Type value, int index){
-	if (dimensions > 1){
-		cout << "Error: Insufficient coordinate given for multidimensional Clump."
-		return false;
-	}
-
-	vector<int> buffer;
-	buffer.push_back(index);
-	return insert(value, buffer);
-}
-
-template<typename Type>
-bool Clump<Type>::insert(std::vector<Type> value, int index){
-	//Check if value is in range
-	if (index < offset || index > elements + offset) return false;
-
-	//Map input to array indice
-	index -= offset;
-
-	//Include new elements before reallocation
-	elements += value.size();
-
-	//Ensure adequate space is available in array
-	if (elements >= length) reallocate();
-
-	//Shift values forward from the end to the insertion
-	if (elements > 0){
-		for (int i = elements + offset; i >= index; i--){
-			ptr[i] = ptr[i - value.size()];
-		}
-	}
-
-	for (int i = 0, i <= value.size(); i++){
-		ptr[index + i] = value[i];
-	}
+	elements[coordinate.size()]++;
 
 	return true;
 }

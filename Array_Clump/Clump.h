@@ -23,9 +23,6 @@ class Clump{
 	bool valid_coordinate(vector<int> coordinate);
 	bool valid_dimension(vector<int> coordinate);
 
-	vector<Type> traversal;
-	Clump<Type> traverse(Clump<Type> value);
-
 	//If true, numbering starts at 1
 	bool offset = true;
 
@@ -34,7 +31,7 @@ class Clump{
 	//int buffer_multiplier = 1;
 
 public:
-	Clump(bool mOffset = false, int mDimensions = 1) : offset(mOffset);
+	Clump(bool mOffset = false, int mDimensions = 1);
 	Clump(Clump& input);
 	~Clump();
 
@@ -51,12 +48,14 @@ public:
 	int get_length() const { return index_expansion(length); }
 	int get_length(int dim) { return length[dim]; }
 
-	int get_elements() const { return index_expansion(elements); }
+	int get_elements() const;
 	bool get_offset() const { return offset; }
 	int get_dimensions() const { return dimensions; }
 
+	vector<Type> traverse();
+
 	//Setters
-	void set_offset(bool mOffset) : offset(mOffset);
+	void set_offset(bool mOffset) { offset(mOffset); }
 	bool set_buffer(int mBuffer);
 
 	//Mutators
@@ -68,20 +67,16 @@ public:
 	void append(Type value) { insert(value, elements + offset); }
 	void prepend(Type value) { insert(value, offset); }
 
-	bool insert(Type value, int index);
-	bool insert(Type value, vector<int> index);
+	bool insert(vector<Type> value, vector<int> index);
 
 	bool remove(vector<int> index);
 	bool remove(int index);
-
-	Type get(vector<int> index);
 
 	void fill(Type);
 	void clear();
 
 	Type operator()(vector<int> coordinate);
-	Type operator[](int index);
-	void operator=(Clump input) { return get(coordinate); }
+	void operator=(Clump input);
 	bool operator==(Clump input);
 };
 
