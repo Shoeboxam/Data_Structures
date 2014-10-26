@@ -3,10 +3,10 @@
 #include <cstdlib>
 #include <ctime>
 
-#include "Clump.h"
+	#include "Clump.h"
 
-int generateValue(int min, int max){
-	return min + rand() % (max - min + 1);
+	int generateValue(int min, int max){
+		return min + rand() % (max - min + 1);
 }
 
 void output(Clump<int> input){

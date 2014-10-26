@@ -21,16 +21,14 @@ public:
 	Clump(Clump& input);
 	~Clump();
 
-
-	bool empty() { return elements == 0; }
-
-	Type front() { return ptr[0]; }
-	Type back() { return ptr[elements - 1]; }
-
 	//Getters
 	int get_length() const { return length; }
 	int get_elements() const { return elements; }
 	bool is_offset() const { return offset; }
+	bool is_empty() { return elements == 0; }
+
+	Type front() { return ptr[0]; }
+	Type back() { return ptr[elements - 1]; }
 
 	//Mutators
 	void append(Type value) { insert(value, elements + offset); }

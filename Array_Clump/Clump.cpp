@@ -125,6 +125,7 @@ Type Clump<Type>::operator[](int index){
 	return ptr[index - offset];
 }
 
+
 template<typename Type>
 bool Clump<Type>::operator==(Clump input){
 	if (elements != input.get_elements()) return false;
