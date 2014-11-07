@@ -23,15 +23,12 @@ class Clump{
 	bool valid_coordinate(vector<int> coordinate);
 	bool valid_dimension(vector<int> coordinate);
 
-	//If true, numbering starts at 1
-	bool offset = true;
-
 	//Extra allocated space between sections of data
 	int buffer_length = 1;
 	//int buffer_multiplier = 1;
 
 public:
-	Clump(bool mOffset = false, int mDimensions = 1);
+	Clump(int mDimensions = 1);
 	Clump(Clump& input);
 	~Clump();
 
@@ -49,13 +46,11 @@ public:
 	int get_length(int dim) { return length[dim]; }
 
 	int get_elements() const;
-	bool get_offset() const { return offset; }
 	int get_dimensions() const { return dimensions; }
 
 	vector<Type> traverse();
 
 	//Setters
-	void set_offset(bool mOffset) { offset(mOffset); }
 	bool set_buffer(int mBuffer);
 
 	//Mutators
@@ -64,8 +59,8 @@ public:
 	bool assign(Type value, vector<int> index);
 	bool assign(Clump<Type> value, vector<int> index);
 
-	void append(Type value) { insert(value, elements + offset); }
-	void prepend(Type value) { insert(value, offset); }
+	void append(Type value) { insert(value, elements); }
+	void prepend(Type value) { insert(value, 0); }
 
 	bool insert(vector<Type> value, vector<int> index);
 

@@ -1,6 +1,5 @@
 template<typename Type>
-Clump<Type>::Clump(bool mOffset, int mDimensions){
-	offset = mOffset;
+Clump<Type>::Clump(int mDimensions){
 	if (mDimensions > 0) { dimensions = mDimensions; }
 
 	for (int i = 0; i < dimensions; i++){
@@ -12,7 +11,6 @@ Clump<Type>::Clump(bool mOffset, int mDimensions){
 template<typename Type>
 Clump<Type>::Clump(Clump& input){
 
-	offset = input.get_offset();
 	elements = input.get_elements();
 	length = input.get_length();
 
@@ -20,7 +18,7 @@ Clump<Type>::Clump(Clump& input){
 
 	//Copy elements of data into new array
 	for (int i = 0; i <= elements - 1; i++){
-		buffer[i] = input[i + offset];
+		buffer[i] = input[i];
 	}
 
 	delete[] ptr;
@@ -60,21 +58,23 @@ bool Clump<Type>::set_buffer(int mBuffer){
 //Map coordinate to flat array indice
 template<typename Type>
 int Clump<Type>::index_expansion(vector<int> coordinate){
+
 	if (coordinate.size() > dimensions) {
 		throw "Error: Too many dimensions specified in coordinate.";
 	}
-	int index = 0;
 
+	int index = 0;
 	for (int dim = 1; dim <= coordinate.size(); dim++){
 		index += point * length[dim];
 	}
+
 	return index;
 }
 
-//Useful for deep copy
+//Useful for deep copy, gets flat vector of all elements
 template<typename Type>
 vector<Type> Clump<Type>::traverse(){
-	vector<Type> traversal;
+
 	vector<int> coordinates;
 	for (int i = 0; i < dimensions; i++){
 		coordinates.push_back(0);
@@ -157,10 +157,7 @@ bool Clump<Type>::insert(vector<Type> value, vector<int> coordinate){
 	int index = index_expansion(coordinate);
 
 	//Check if value is in range
-	if (index < offset || index > elements + offset) { return false; }
-
-	//Map input to array indice
-	index -= offset; //TODO: Should I power offset with dimensions? Or just in the getter?
+	if (index < 0 || index > elements) { return false; }
 
 	//Ensure adequate space is available in array
 	if (elements.front() >= length.front()) { 
@@ -176,7 +173,7 @@ bool Clump<Type>::insert(vector<Type> value, vector<int> coordinate){
 				ptr[i + length[dim]]
 			}
 		}
-		for (int i = elements.back() + offset; i >= index; i--){
+		for (int i = elements.back(); i >= index; i--){
 			ptr[i] = ptr[i - 1];
 		}
 	}
@@ -189,7 +186,6 @@ bool Clump<Type>::insert(vector<Type> value, vector<int> coordinate){
 
 template<typename Type>
 bool Clump<Type>::remove(int index){
-	index -= offset;
 
 	if (index > elements) return false;
 	if (elements >= length/2) reallocate();
@@ -235,7 +231,6 @@ void Clump<Type>::clear(){
 
 template<typename Type>
 void Clump<Type>::operator=(Clump input){
-	offset = input.get_offset();
 	elements = input.get_elements();
 	length = input.get_length();
 
@@ -243,7 +238,7 @@ void Clump<Type>::operator=(Clump input){
 
 	//Copy elements of data into new array
 	for (int i = 0; i <= elements - 1; i++){
-		buffer[i] = input[i + offset];
+		buffer[i] = input[i];
 	}
 
 	delete[] ptr;
@@ -255,7 +250,7 @@ bool Clump<Type>::operator==(Clump input){
 	if (elements != input.get_elements()) return false;
 
 	for (int i = 0; i <= elements - 1; i++){
-		if (ptr[i] != input[i + input.get_offset()]) return false;
+		if (ptr[i] != input[i]) return false;
 	}
 	return true;
 }
