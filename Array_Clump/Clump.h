@@ -20,8 +20,6 @@ class Clump{
 	void reallocate(int degree, int growth);
 
 	int index_expansion(vector<int> coordinate);
-	bool valid_coordinate(vector<int> coordinate);
-	bool valid_dimension(vector<int> coordinate);
 
 	//Extra allocated space between sections of data
 	int buffer_length = 1;
@@ -32,34 +30,29 @@ public:
 	Clump(Clump& input);
 	~Clump();
 
-
-	bool is_empty() { return elements == 0; }
-
-	Type front() { return ptr[0]; }
-	Type back() { return ptr[elements - 1]; }
-	
-
 	//Getters
 	Type get(vector<int> coordinate);
 
-	int get_length() const { return index_expansion(length); }
-	int get_length(int dim) { return length[dim]; }
+	int get_size() const { return index_expansion(length); }
+	int get_length(int dimension) { return length[dim]; }
 
 	int get_elements() const;
 	int get_dimensions() const { return dimensions; }
 
+	bool valid_point(vector<int> coordinate);
+	bool valid_indice(vector<int> coordinate);
+
 	vector<Type> traverse();
+	vector<Type> traverse(vector<int> coordinates);
 
 	//Setters
 	bool set_buffer(int mBuffer);
 
 	//Mutators
-	bool assign(Type value, int index);
-	bool assign(Clump<Type> value, int index);
 	bool assign(Type value, vector<int> index);
 	bool assign(Clump<Type> value, vector<int> index);
 
-	void append(Type value) { insert(value, elements); }
+	void append(Type value, vector<int> coordinate_dimension) { insert(value, index_expansion(coordinate_dimension)); }
 	void prepend(Type value) { insert(value, 0); }
 
 	bool insert(vector<Type> value, vector<int> index);

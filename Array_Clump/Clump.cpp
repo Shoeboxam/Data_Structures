@@ -74,13 +74,23 @@ int Clump<Type>::index_expansion(vector<int> coordinate){
 //Useful for deep copy, gets flat vector of all elements
 template<typename Type>
 vector<Type> Clump<Type>::traverse(){
-
 	vector<int> coordinates;
 	for (int i = 0; i < dimensions; i++){
 		coordinates.push_back(0);
 	}
+
+	return traverse(coordinates);
+}
+
+
+//Depth first graph/tree traversal algorithm
+template<typename Type>
+vector<Type> Clump<Type>::traverse(vector<int> coordinates){
 	
 	vector<Type> recurse(int dim){
+		
+		vector<Type> traversal;
+
 		for (int dim = 0; dim < dimensions; dim++){
 			for (int i = 0; i < length[dim]; i++){
 
@@ -90,14 +100,16 @@ vector<Type> Clump<Type>::traverse(){
 				recurse(dim);
 			}
 		}
+		return traversal;
 	}
 
-	return recurse(dimensions, vector<int>);
+	return recurse(dimensions);
 }
 
+//Coordinate validation - check for valid point or range
 //Point validation
 template<typename Type>
-bool Clump<Type>::valid_coordinate(vector<int> coordinate){
+bool Clump<Type>::valid_point(vector<int> coordinate){
 	if (coordinate.size() != dimensions) { return false; }
 
 	for (int dim = 1; dim <= coordinate.size(); dim++){
@@ -107,9 +119,9 @@ bool Clump<Type>::valid_coordinate(vector<int> coordinate){
 	return true;
 }
 
-//Row validation
+//Indice validation
 template<typename Type>
-bool Clump<Type>::valid_dimension(vector<int> coordinate){
+bool Clump<Type>::valid_indice(vector<int> coordinate){
 	if (dimensions < coordinate.size()) { return false; }
 
 	for (int dim = 1; dim <= coordinate.size(); dim++){
@@ -150,7 +162,7 @@ void Clump<Type>::reallocate(int degree, int growth){
 //TODO: Insertion should accept Clumps compatible with child dimensions
 template<typename Type>
 bool Clump<Type>::insert(vector<Type> value, vector<int> coordinate){
-	//NOTE: Insertion of >1D array bucket fills all child dimensions
+	//NOTE: Insertion of >1D array bucket fills child dimensions
 	//IE: Inserting five @ dimension 4 of 7 bucket fills five in the newly created child rows in dimensions 4, 5, 6 and 7
 
 	//Convert from coordinate to raw index
@@ -183,6 +195,7 @@ bool Clump<Type>::insert(vector<Type> value, vector<int> coordinate){
 
 	return true;
 }
+
 
 template<typename Type>
 bool Clump<Type>::remove(int index){
