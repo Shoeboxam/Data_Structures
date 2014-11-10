@@ -134,22 +134,14 @@ bool Clump<Type>::valid_indice(vector<int> coordinate){
 
 //Expansion and contraction of underlying C-array storage
 template<typename Type>
-void Clump<Type>::reallocate(int degree, int growth){
-	//Degree specifies dimension to grow, growth specifies how many new indices
-
-
-	vector<int> old_length = length;
-
-	//Extend length at dimension degree by growth. Build in buffer here
-	length[degree] = elements[degree] + growth + buffer_length;
+void Clump<Type>::reallocate(vector<int> length_new){
 
 	//Find index of maximum possible coordinate, set length of buffer to it
-	//Buffers are already built into length
-	Type * buffer = new Type[index_expand(length)];
+	Type * buffer = new Type[index_expand(length_new)];
 
 	//Copy elements of data into new array with respect to newly allocated indices
-	for (int dim = 0; dim <= old_length.size(); dim++){
-		for (int i = 0; i <= old_length[dim]; i++){
+	for (int dim = 0; dim <= length.size(); dim++){
+		for (int i = 0; i <= length[dim]; i++){
 			buffer[length[dim] * i] = ptr[old_length[dim] * i];
 		}
 	}

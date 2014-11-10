@@ -13,10 +13,9 @@ int main(){
 	//Seed random number generator
 	srand(static_cast<int>(time(NULL)));
 
-	Clump<int> randoms(2 /*Dimensions*/);
-
-	randoms.append(23, vector < int > {1, 5});
-
+	Clump<int> randoms(3 /*Dimensions*/);
+	randoms.insert(, vector<int> {0, 0, 0});
+	randoms.insert()
 	//randoms.
 
 	system("pause");

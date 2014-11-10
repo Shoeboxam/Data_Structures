@@ -19,7 +19,7 @@ class Clump{
 
 	void reallocate(int degree, int growth);
 
-	int index_expansion(vector<int> coordinate);
+	int index_expansion(vector<int> coordinates);
 
 	//Extra allocated space between sections of data
 	int buffer_length = 1;
@@ -31,7 +31,7 @@ public:
 	~Clump();
 
 	//Getters
-	Type get(vector<int> coordinate);
+	Type get(vector<int> coordinates);
 
 	int get_size() const { return index_expansion(length); }
 	int get_length(int dimension) { return length[dim]; }
@@ -39,8 +39,8 @@ public:
 	int get_elements() const;
 	int get_dimensions() const { return dimensions; }
 
-	bool valid_point(vector<int> coordinate);
-	bool valid_indice(vector<int> coordinate);
+	bool valid_point(vector<int> coordinates);
+	bool valid_indice(vector<int> coordinates);
 
 	vector<Type> traverse();
 	vector<Type> traverse(vector<int> coordinates);
@@ -52,18 +52,16 @@ public:
 	bool assign(Type value, vector<int> index);
 	bool assign(Clump<Type> value, vector<int> index);
 
-	void append(Type value, vector<int> coordinate_dimension) { insert(value, index_expansion(coordinate_dimension)); }
-	void prepend(Type value) { insert(value, 0); }
-
-	bool insert(vector<Type> value, vector<int> index);
-
+	bool insert(vector<Type> value, vector<int> coordinates);
+	bool insert(Clump& insertion, vector<int> coordinates);
+	
 	bool remove(vector<int> index);
 	bool remove(int index);
 
 	void fill(Type);
 	void clear();
 
-	Type operator()(vector<int> coordinate);
+	Type operator()(vector<int> coordinates);
 	void operator=(Clump input);
 	bool operator==(Clump input);
 };
