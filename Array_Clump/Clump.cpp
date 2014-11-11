@@ -1,3 +1,10 @@
+#include "Clump.h"
+
+template<typename Type>
+void Clump<Type>::actions::flattened_vector(Type value, vector<int> coordinates){
+	flat.push_back(value);
+}
+
 template<typename Type>
 Clump<Type>::Clump(int mDimensions){
 	if (mDimensions > 0) { dimensions = mDimensions; }
@@ -85,7 +92,7 @@ vector<Type> Clump<Type>::traverse(){
 
 //Depth first graph/tree traversal algorithm
 template<typename Type>
-vector<Type> Clump<Type>::traverse(vector<int> coordinates){
+vector<Type> Clump<Type>::traverse(){
 	
 	vector<Type> recurse(int dim){
 		

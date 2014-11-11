@@ -25,6 +25,11 @@ class Clump{
 	int buffer_length = 1;
 	//int buffer_multiplier = 1;
 
+	struct actions{
+		vector<Type> flat;
+		flattened_vector(Type value, vector<int> coordinates);
+	};
+
 public:
 	Clump(int mDimensions = 1);
 	Clump(Clump& input);
