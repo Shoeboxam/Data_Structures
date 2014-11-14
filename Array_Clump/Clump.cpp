@@ -1,3 +1,7 @@
+#include "Clump.h"
+
+#include <iostream>
+using std::cout;
 
 template<typename Type>
 Clump<Type>::Clump(bool mOffset){
@@ -42,6 +46,33 @@ void Clump<Type>::reallocate(){
 	delete[] ptr;
 	ptr = buffer;
 }
+
+
+template<typename Type>
+void Clump<Type>::sort(){
+	int gap = elements;
+	float shrink = 1.3;
+	bool swapped = false;
+
+	while (gap != 1 || swapped == true){
+		gap /= shrink;
+		if (gap < 1) gap = 1;
+
+		swapped = false;
+		for (int index = 0; index + gap < elements; index++){
+			if (ptr[index] > ptr[index + gap]){
+
+				//Swap!
+				Type buffer = ptr[index + gap];
+				ptr[index + gap] = ptr[index];
+				ptr[index] = buffer;
+
+				swapped = true;
+			}
+		}
+	}
+}
+
 
 template<typename Type>
 bool Clump<Type>::insert(Type value, int index){

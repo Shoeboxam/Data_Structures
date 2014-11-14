@@ -2,10 +2,10 @@
 #define CLUMP_H
 
 #include <iostream>
-#include <stdexcept>
 
 template<typename Type>
-class Clump{
+class Clump {
+protected:
 	int length = 1;
 	int elements = 0;
 
@@ -39,6 +39,8 @@ public:
 
 	void fill(Type);
 	void clear();
+
+	void sort();
 
 	void operator=(Clump input);
 	Type operator[](int index);

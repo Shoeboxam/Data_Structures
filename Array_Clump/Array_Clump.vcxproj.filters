@@ -21,12 +21,18 @@
     <ClCompile Include="Clump.cpp">
       <Filter>Resource Files\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Sorted_Clump.cpp">
+      <Filter>Resource Files\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clump.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="2D_Array.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sorted_Clump.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -22,7 +22,7 @@ int main(){
 
 	Clump<int> randoms(true);
 
-	for (int i = 0; i < 3; i++){
+	for (int i = 0; i < 10; i++){
 		randoms.append(generateValue(0, 100));
 	}
 
@@ -60,6 +60,10 @@ int main(){
 
 	randoms2.append(4);
 	std::cout << "Clump == modified clump?   " << (randoms2 == randoms) << std::endl;
+
+	std::cout << "Sorted" << std::endl;
+	randoms.sort();
+	output(randoms);
 
 	std::cout << std::endl << "Fill with zeros: " << std::endl;
 	randoms.fill(0);

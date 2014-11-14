@@ -80,10 +80,12 @@
     <ClCompile Include="Clump.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Sorted_Clump.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2D_Array.h" />
     <ClInclude Include="Clump.h" />
+    <ClInclude Include="Sorted_Clump.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
