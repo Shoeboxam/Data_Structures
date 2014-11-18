@@ -84,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2D_Array.h" />
+    <ClInclude Include="Clink.h" />
     <ClInclude Include="Clump.h" />
     <ClInclude Include="Sorted_Clump.h" />
   </ItemGroup>

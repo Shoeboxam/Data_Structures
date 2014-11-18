@@ -35,5 +35,8 @@
     <ClInclude Include="Sorted_Clump.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Clink.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

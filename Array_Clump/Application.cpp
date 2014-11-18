@@ -3,7 +3,8 @@
 #include <cstdlib>
 #include <ctime>
 
-	#include "Clump.h"
+#include "Clump.h"
+#include "Clink.h"
 
 	int generateValue(int min, int max){
 		return min + rand() % (max - min + 1);
@@ -75,4 +76,4 @@ int main(){
 
 	system("pause");
 	return 0;
-}
+};
