@@ -1,16 +1,28 @@
 #ifndef CLINK_H
 #define CLINK_H
 
+#include "Access_API.h"
+
 template<typename Type>
-class Clink {
+class Clink : public Access_API<Type> {
+
+	template<typename Type>
+	class Node;
+
+	Node<Type>* element_first;
+	Node<Type>* element_last;
+
 public:
-	Type value;
-	Clink<Type>* _next = NULL;
 
-	Clink(const Type& input) { value = input; Clink<Type>* next_node = NULL}
-	~Clink() { delete *next_node; }
+	Type get_value(int index);
 
-	bool add(Type input) { next = *new Clink<Type>(input) }
+	bool insert(Type value, int index);
+	bool remove(int index);
+
+	void fill(Type);
+	void clear();
+
+	void sort();
 };
 
 

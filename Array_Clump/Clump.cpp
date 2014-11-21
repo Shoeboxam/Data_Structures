@@ -4,14 +4,8 @@
 using std::cout;
 
 template<typename Type>
-Clump<Type>::Clump(bool mOffset){
-	offset = mOffset;
-}
-
-template<typename Type>
 Clump<Type>::Clump(Clump& input){
 
-	offset = input.is_offset();
 	elements = input.get_elements();
 	length = input.get_length();
 
@@ -19,7 +13,7 @@ Clump<Type>::Clump(Clump& input){
 
 	//Copy elements of data into new array
 	for (int i = 0; i <= elements - 1; i++){
-		buffer[i] = input[i + offset];
+		buffer[i] = input[i];
 	}
 
 	delete[] ptr;
@@ -77,17 +71,14 @@ void Clump<Type>::sort(){
 template<typename Type>
 bool Clump<Type>::insert(Type value, int index){
 	//Check if value is in range
-	if (index < offset || index > elements + offset) return false;
-
-	//Map input to array indice
-	index -= offset;
+	if (index < 0 || index > elements - 1) return false;
 
 	//Ensure adequate space is available in array
 	if (elements >= length) reallocate();
 
 	//Shift values forward one from the end to the insertion
 	if (elements > 0){
-		for (int i = elements + offset; i >= index; i--){
+		for (int i = elements; i >= index; i--){
 			ptr[i] = ptr[i - 1];
 		}
 	}
@@ -100,7 +91,6 @@ bool Clump<Type>::insert(Type value, int index){
 
 template<typename Type>
 bool Clump<Type>::remove(int index){
-	index -= offset;
 
 	if (index > elements) return false;
 	if (elements >= length/2) reallocate();
@@ -132,7 +122,6 @@ void Clump<Type>::clear(){
 
 template<typename Type>
 void Clump<Type>::operator=(Clump input){
-	offset = input.is_offset();
 	elements = input.get_elements();
 	length = input.get_length();
 
@@ -140,7 +129,7 @@ void Clump<Type>::operator=(Clump input){
 
 	//Copy elements of data into new array
 	for (int i = 0; i <= elements - 1; i++){
-		buffer[i] = input[i + offset];
+		buffer[i] = input[i];
 	}
 
 	delete[] ptr;
@@ -149,11 +138,11 @@ void Clump<Type>::operator=(Clump input){
 
 template<typename Type>
 Type Clump<Type>::operator[](int index){
-	if (index < offset || index > elements - !offset){
+	if (index < 0 || index > elements){
 		throw std::out_of_range("Error: index out of bounds");
 	}
 
-	return ptr[index - offset];
+	return ptr[index];
 }
 
 
@@ -162,7 +151,7 @@ bool Clump<Type>::operator==(Clump input){
 	if (elements != input.get_elements()) return false;
 
 	for (int i = 0; i <= elements - 1; i++){
-		if (ptr[i] != input[i + input.is_offset()]) return false;
+		if (ptr[i] != input[i]) return false;
 	}
 	return true;
 }

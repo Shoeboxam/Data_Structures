@@ -3,37 +3,23 @@
 
 #include <iostream>
 
-template<typename Type>
-class Clump {
-protected:
-	int length = 1;
-	int elements = 0;
+#include "Access_API.h"
 
+template<typename Type>
+class Clump : public Access_API {
+protected:
 	Type * ptr = new Type[length];
 
 	void reallocate();
 
-	//If true, numbering starts at 1
-	bool offset = true;
-
 public:
-	Clump(bool mOffset = false);
 	Clump(Clump& input);
 	~Clump();
 
-	//Getters
-	int get_length() const { return length; }
-	int get_elements() const { return elements; }
-	bool is_offset() const { return offset; }
-	bool is_empty() { return elements == 0; }
+	Type get_value(int index);
 
-	Type front() { return ptr[0]; }
-	Type back() { return ptr[elements - 1]; }
 
 	//Mutators
-	void append(Type value) { insert(value, elements + offset); }
-	void prepend(Type value) { insert(value, offset); }
-
 	bool insert(Type value, int index);
 	bool remove(int index);
 

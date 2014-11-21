@@ -24,7 +24,7 @@ int main(){
 	Clump<int> randoms(true);
 
 	for (int i = 0; i < 10; i++){
-		randoms.append(generateValue(0, 100));
+		randoms.push_back(generateValue(0, 100));
 	}
 
 	std::cout << std::endl << "Explicit output 1: " << randoms[randoms.is_offset()] << std::endl;
@@ -35,11 +35,11 @@ int main(){
 	output(randoms);
 
 	std::cout << std::endl << "Prepend 785: " << std::endl;
-	randoms.prepend(785);
+	randoms.push_front(785);
 	output(randoms);
 
 	std::cout << std::endl << "Append five: " << std::endl;
-	randoms.append(5);
+	randoms.push_back(5);
 	output(randoms);
 
 	std::cout << std::endl << "Explicit output 1: " << randoms[1] << std::endl;
@@ -59,7 +59,7 @@ int main(){
 	Clump<int> randoms2 = randoms;
 	std::cout << std::endl << "Clump == identical clump?  " << (randoms2==randoms) << std::endl;
 
-	randoms2.append(4);
+	randoms2.push_back(4);
 	std::cout << "Clump == modified clump?   " << (randoms2 == randoms) << std::endl;
 
 	std::cout << "Sorted" << std::endl;

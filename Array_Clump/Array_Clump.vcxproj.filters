@@ -24,6 +24,9 @@
     <ClCompile Include="Sorted_Clump.cpp">
       <Filter>Resource Files\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Clink.cpp">
+      <Filter>Resource Files\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clump.h">
@@ -36,6 +39,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Clink.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Access_API.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
