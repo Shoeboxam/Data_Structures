@@ -5,11 +5,14 @@
 template<typename Type>
 class Access_API {
 protected:
-	int length = 1;
-	int elements = 0;
-
-
 public:
+	int length, elements;
+
+	Access_API(){
+		length = 1;
+		elements = 0;
+	}
+
 	//Getters
 	virtual Type get(int index) = 0;
 

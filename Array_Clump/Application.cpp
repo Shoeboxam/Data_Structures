@@ -1,4 +1,6 @@
 #include <iostream>
+using std::cout;
+using std::endl;
 
 #include <cstdlib>
 #include <ctime>
@@ -6,15 +8,15 @@
 #include "Clump.h"
 #include "Clink.h"
 
-	int generateValue(int min, int max){
+int generateValue(int min, int max){
 		return min + rand() % (max - min + 1);
 }
 
 void output(Clump<int> input){
 	for (int i = 0; i < input.get_elements(); i++){
-		std::cout << input[i] << " ";
+		cout << input[i] << " ";
 	}
-	std::cout << std::endl;
+	cout << endl;
 }
 
 int main(){
@@ -24,53 +26,54 @@ int main(){
 	Clump<int> randoms;
 
 	for (int i = 0; i < 10; i++){
-		randoms.push_back(generateValue(0, 100));
+		cout << randoms.push_back(generateValue(0, 100)) << endl;
 	}
 
-	std::cout << std::endl << "Explicit output 1: " << randoms[0] << std::endl;
-	std::cout << "Explicit output 2: " << randoms[1] << std::endl;
-	std::cout << "Explicit output 3: " << randoms[2] << std::endl;
+	cout << endl;
+	cout << "Explicit output 1: " << randoms[0] << endl;
+	cout << "Explicit output 2: " << randoms[1] << endl;
+	cout << "Explicit output 3: " << randoms[2] << endl;
 
-	std::cout << "3 Random numbers: " << std::endl;
+	cout << "3 Random numbers: " << endl;
 	output(randoms);
 
-	std::cout << std::endl << "Prepend 785: " << std::endl;
+	cout << endl << "Prepend 785: " << endl;
 	randoms.push_front(785);
 	output(randoms);
 
-	std::cout << std::endl << "Append five: " << std::endl;
+	cout << endl << "Append five: " << endl;
 	randoms.push_back(5);
 	output(randoms);
 
-	std::cout << std::endl << "Explicit output 1: " << randoms[1] << std::endl;
+	cout << endl << "Explicit output 1: " << randoms[1] << endl;
 
-	std::cout << std::endl << "Remove index 2: " << std::endl;
+	cout << endl << "Remove index 2: " << endl;
 	randoms.remove(2);
 	output(randoms);
 
-	std::cout << std::endl << "Insert to index 2: " << std::endl;
+	cout << endl << "Insert to index 2: " << endl;
 	randoms.insert(41, 2);
 	output(randoms);
 
-	std::cout << std::endl << "Front: " << randoms.front() << std::endl;
-	std::cout << std::endl << "Back: " << randoms.back() << std::endl;
+	cout << endl << "Front: " << randoms.front() << endl;
+	cout << endl << "Back: " << randoms.back() << endl;
 
 
 	Clump<int> randoms2 = randoms;
-	std::cout << std::endl << "Clump == identical clump?  " << (randoms2==randoms) << std::endl;
+	cout << endl << "Clump == identical clump?  " << (randoms2==randoms) << endl;
 
 	randoms2.push_back(4);
-	std::cout << "Clump == modified clump?   " << (randoms2 == randoms) << std::endl;
+	cout << "Clump == modified clump?   " << (randoms2 == randoms) << endl;
 
-	std::cout << "Sorted" << std::endl;
+	cout << "Sorted" << endl;
 	randoms.sort();
 	output(randoms);
 
-	std::cout << std::endl << "Fill with zeros: " << std::endl;
+	cout << endl << "Fill with zeros: " << endl;
 	randoms.fill(0);
 	output(randoms);
 
-	std::cout << std::endl << "Clear: " << std::endl;
+	cout << endl << "Clear: " << endl;
 	randoms.clear();
 	output(randoms);
 

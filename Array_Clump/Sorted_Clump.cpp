@@ -17,7 +17,7 @@ bool Sorted_Clump<Type>::insert(Type value){
 
 	//Shift values forward one from the end to the insertion
 	if (elements > 0){
-		for (int i = elements + offset; i >= index; i--){
+		for (int i = elements; i >= index; i--){
 			ptr[i] = ptr[i - 1];
 		}
 	}

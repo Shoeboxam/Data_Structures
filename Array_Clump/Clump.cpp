@@ -1,12 +1,6 @@
-#include "Clump.h"
 
 #include <iostream>
 using std::cout;
-
-template<typename Type>
-Clump<Type>::Clump(){
-	
-}
 
 template<typename Type>
 Clump<Type>::Clump(Clump& input){
@@ -48,7 +42,7 @@ void Clump<Type>::reallocate(){
 
 template<typename Type>
 Type Clump<Type>::get(int index){
-	if (index < 0 || index > elements){
+	if (index < 0 || index > elements - 1){
 		throw std::out_of_range("Error: index out of bounds");
 	}
 
@@ -85,7 +79,7 @@ void Clump<Type>::sort(){
 template<typename Type>
 bool Clump<Type>::insert(Type value, int index){
 	//Check if value is in range
-	if (index < 0 || index > elements - 1) return false;
+	if (index < 0 || index > elements) return false;
 
 	//Ensure adequate space is available in array
 	if (elements >= length) reallocate();

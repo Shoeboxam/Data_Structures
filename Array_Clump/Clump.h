@@ -12,7 +12,7 @@ protected:
 	void reallocate();
 
 public:
-	Clump();
+	Clump(){}
 	Clump(Clump& input);
 	~Clump();
 
@@ -32,5 +32,7 @@ public:
 	Type operator[](int index);
 	bool operator==(Clump input);
 };
+
+#include "Clump.cpp"
 
 #endif
