@@ -10,19 +10,22 @@ class Clink : public Access_API<Type> {
 	class Node {
 	public:
 		Type value;
-		Node<Type>* _next;
+		Node<Type>* next;
 
 		Node(const Type& input){
 			value = input;
 			Node<Type>* first = nullptr;
 		}
 		~Node(){
-			delete *next_node;
+			delete *next;
 		}
 	};
 
 	Node<Type>* element_first;
 	Node<Type>* element_last;
+	Node<Type>* element_placer;
+
+	bool set_placer(int index);
 
 public:
 
