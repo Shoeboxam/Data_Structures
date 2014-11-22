@@ -1,29 +1,7 @@
 #include "Clink.h"
 
 template<typename Type>
-class Clink<Type>::Node {
-public:
-	Type value;
-	Node<Type>* _next;
-
-	Node(const Type& input);
-	~Node();
-};
-
-template<typename Type>
-Clink<Type>::Node<Type>::~Node(){
-	delete *next_node;
-}
-
-
-template<typename Type>
-Clink<Type>::Node<Type>::Node(const Type& input) { 
-	value = *input;
-	Node<Type>* first = NULL;
-}
-
-template<typename Type>
-Type Clink<Type>::get_value(int index){
+Type Clink<Type>::get(int index){
 
 }
 
@@ -34,12 +12,12 @@ bool Clink<Type>::insert(Type input, int index) {
 
 template<typename Type>
 bool Clink<Type>::remove(int index){
-
+	return true; //TODO
 }
 
 
 template<typename Type>
-void Clink<Type>::fill(Type){
+void Clink<Type>::fill(Type value){
 
 }
 
@@ -47,7 +25,6 @@ template<typename Type>
 void Clink<Type>::clear(){
 
 }
-
 
 template<typename Type>
 void Clink<Type>::sort(){

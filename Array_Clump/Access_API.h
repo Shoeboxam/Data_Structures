@@ -1,3 +1,6 @@
+#ifndef ACCESS_H
+#define ACCESS_H
+
 
 template<typename Type>
 class Access_API {
@@ -8,14 +11,14 @@ protected:
 
 public:
 	//Getters
-	virtual Type get_value(int index) const = 0;
+	virtual Type get(int index) = 0;
 
 	virtual int get_length() const { return length; }
 	virtual int get_elements() const { return elements; }
 	virtual bool is_empty() const { return elements == 0; }
 
-	virtual front() const { return get_value(0); }
-	virtual back() const { return get_value(elements - 1); }
+	virtual Type front() { return get(0); }
+	virtual Type back() { return get(elements - 1); }
 
 	//Mutators
 	bool push_back(Type value) { return insert(value, elements); }
@@ -32,3 +35,5 @@ public:
 
 	virtual void sort() = 0;
 };
+
+#endif

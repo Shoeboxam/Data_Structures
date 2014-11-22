@@ -4,6 +4,11 @@
 using std::cout;
 
 template<typename Type>
+Clump<Type>::Clump(){
+	
+}
+
+template<typename Type>
 Clump<Type>::Clump(Clump& input){
 
 	elements = input.get_elements();
@@ -39,6 +44,15 @@ void Clump<Type>::reallocate(){
 	//Delete ptr contents, then set pointer to the new array
 	delete[] ptr;
 	ptr = buffer;
+}
+
+template<typename Type>
+Type Clump<Type>::get(int index){
+	if (index < 0 || index > elements){
+		throw std::out_of_range("Error: index out of bounds");
+	}
+
+	return ptr[index];
 }
 
 
@@ -138,11 +152,7 @@ void Clump<Type>::operator=(Clump input){
 
 template<typename Type>
 Type Clump<Type>::operator[](int index){
-	if (index < 0 || index > elements){
-		throw std::out_of_range("Error: index out of bounds");
-	}
-
-	return ptr[index];
+	return get(index);
 }
 
 

@@ -1,22 +1,22 @@
 #ifndef CLUMP_H
 #define CLUMP_H
 
+#include "Access_API.h"
 #include <iostream>
 
-#include "Access_API.h"
-
 template<typename Type>
-class Clump : public Access_API {
+class Clump : public Access_API<Type> {
 protected:
 	Type * ptr = new Type[length];
 
 	void reallocate();
 
 public:
+	Clump();
 	Clump(Clump& input);
 	~Clump();
 
-	Type get_value(int index);
+	Type get(int index);
 
 
 	//Mutators
@@ -32,7 +32,5 @@ public:
 	Type operator[](int index);
 	bool operator==(Clump input);
 };
-
-#include "Clump.cpp"
 
 #endif

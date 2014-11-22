@@ -7,14 +7,29 @@ template<typename Type>
 class Clink : public Access_API<Type> {
 
 	template<typename Type>
-	class Node;
+	class Node {
+	public:
+		Type value;
+		Node<Type>* _next;
+
+		Node(const Type& input){
+			value = input;
+			Node<Type>* first = nullptr;
+		}
+		~Node(){
+			delete *next_node;
+		}
+	};
 
 	Node<Type>* element_first;
 	Node<Type>* element_last;
 
 public:
 
-	Type get_value(int index);
+	Clink();
+	~Clink();
+
+	Type get(int index);
 
 	bool insert(Type value, int index);
 	bool remove(int index);

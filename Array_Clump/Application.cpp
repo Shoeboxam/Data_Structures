@@ -11,7 +11,7 @@
 }
 
 void output(Clump<int> input){
-	for (int i = input.is_offset(); i < input.get_elements() + input.is_offset(); i++){
+	for (int i = 0; i < input.get_elements(); i++){
 		std::cout << input[i] << " ";
 	}
 	std::cout << std::endl;
@@ -21,15 +21,15 @@ int main(){
 	//Seed random number generator
 	srand(static_cast<int>(time(NULL)));
 
-	Clump<int> randoms(true);
+	Clump<int> randoms;
 
 	for (int i = 0; i < 10; i++){
 		randoms.push_back(generateValue(0, 100));
 	}
 
-	std::cout << std::endl << "Explicit output 1: " << randoms[randoms.is_offset()] << std::endl;
-	std::cout << "Explicit output 2: " << randoms[randoms.is_offset()+1] << std::endl;
-	std::cout << "Explicit output 3: " << randoms[randoms.is_offset()+2] << std::endl;
+	std::cout << std::endl << "Explicit output 1: " << randoms[0] << std::endl;
+	std::cout << "Explicit output 2: " << randoms[1] << std::endl;
+	std::cout << "Explicit output 3: " << randoms[2] << std::endl;
 
 	std::cout << "3 Random numbers: " << std::endl;
 	output(randoms);
