@@ -23,16 +23,20 @@ class Clink : public Access_API<Type> {
 
 	Node<Type>* element_first;
 	Node<Type>* element_last;
-	Node<Type>* element_placer;
 
-	bool set_placer(int index);
+	Node<Type>* node_placer;
+
 
 public:
 
-	Clink();
+	Clink(){}
 	~Clink();
 
 	Type get(int index);
+	bool set_placer(int index);
+
+	Type get_placer() { return node_placer->value; }
+	bool increment_placer();
 
 	bool insert(Type value, int index);
 	bool remove(int index);
@@ -41,7 +45,11 @@ public:
 	void clear();
 
 	void sort();
+
+	void operator=(Clink& input);
+	Type operator[](int index);
+	bool operator==(Clink& input);
 };
 
-
+#include "Clink.cpp"
 #endif

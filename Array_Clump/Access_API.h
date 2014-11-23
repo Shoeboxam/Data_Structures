@@ -6,17 +6,15 @@ template<typename Type>
 class Access_API {
 protected:
 public:
-	int length, elements;
+	int elements;
 
 	Access_API(){
-		length = 1;
 		elements = 0;
 	}
 
 	//Getters
 	virtual Type get(int index) = 0;
 
-	virtual int get_length() const { return length; }
 	virtual int get_elements() const { return elements; }
 	virtual bool is_empty() const { return elements == 0; }
 

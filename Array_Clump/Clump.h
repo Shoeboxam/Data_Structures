@@ -11,13 +11,15 @@ protected:
 
 	void reallocate();
 
+	int length;
+
 public:
-	Clump(){}
+	Clump(){ length = 1; }
 	Clump(Clump& input);
 	~Clump();
 
 	Type get(int index);
-
+	int get_length() const { return length; }
 
 	//Mutators
 	bool insert(Type value, int index);
@@ -28,9 +30,9 @@ public:
 
 	void sort();
 
-	void operator=(Clump input);
+	void operator=(const Clump& input);
 	Type operator[](int index);
-	bool operator==(Clump input);
+	bool operator==(const Clump& input);
 };
 
 #include "Clump.cpp"

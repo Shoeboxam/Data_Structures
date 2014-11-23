@@ -129,7 +129,7 @@ void Clump<Type>::clear(){
 }
 
 template<typename Type>
-void Clump<Type>::operator=(Clump input){
+void Clump<Type>::operator=(const Clump& input){
 	elements = input.get_elements();
 	length = input.get_length();
 
@@ -151,7 +151,7 @@ Type Clump<Type>::operator[](int index){
 
 
 template<typename Type>
-bool Clump<Type>::operator==(Clump input){
+bool Clump<Type>::operator==(const Clump& input){
 	if (elements != input.get_elements()) return false;
 
 	for (int i = 0; i <= elements - 1; i++){

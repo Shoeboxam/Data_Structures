@@ -9,10 +9,10 @@ using std::endl;
 #include "Clink.h"
 
 int generateValue(int min, int max){
-		return min + rand() % (max - min + 1);
+	return min + rand() % (max - min + 1);
 }
 
-void output(Clump<int> input){
+void output(Clink<int>& input){
 	for (int i = 0; i < input.get_elements(); i++){
 		cout << input[i] << " ";
 	}
@@ -23,7 +23,7 @@ int main(){
 	//Seed random number generator
 	srand(static_cast<int>(time(NULL)));
 
-	Clump<int> randoms;
+	Clink<int> randoms;
 
 	for (int i = 0; i < 10; i++){
 		cout << randoms.push_back(generateValue(0, 100)) << endl;
@@ -59,7 +59,7 @@ int main(){
 	cout << endl << "Back: " << randoms.back() << endl;
 
 
-	Clump<int> randoms2 = randoms;
+	Clink<int> randoms2 = randoms;
 	cout << endl << "Clump == identical clump?  " << (randoms2==randoms) << endl;
 
 	randoms2.push_back(4);
