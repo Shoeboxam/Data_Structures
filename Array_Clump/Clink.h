@@ -12,12 +12,10 @@ class Clink : public Access_API<Type> {
 		Type value;
 		Node<Type>* next;
 
-		Node(const Type& input){
-			value = input;
-			Node<Type>* first = nullptr;
-		}
+		Node(){ next = nullptr; }
+		Node(const Type& input){ value = input; next = nullptr; }
 		~Node(){
-			delete *next;
+			delete next;
 		}
 	};
 
@@ -30,6 +28,7 @@ class Clink : public Access_API<Type> {
 public:
 
 	Clink(){}
+	Clink(Clink<Type>& input);
 	~Clink();
 
 	Type get(int index);

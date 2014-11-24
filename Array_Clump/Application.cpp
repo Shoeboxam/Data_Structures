@@ -70,7 +70,7 @@ int main(){
 	output(randoms);
 
 	cout << endl << "Fill with zeros: " << endl;
-	randoms.fill(0);
+	//randoms.fill(0);
 	output(randoms);
 
 	cout << endl << "Clear: " << endl;

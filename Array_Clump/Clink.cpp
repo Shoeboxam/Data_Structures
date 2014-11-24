@@ -4,6 +4,11 @@ Clink<Type>::~Clink(){
 	clear();
 }
 
+template<typename Type>
+Clink<Type>::Clink(Clink<Type>& input){
+	*this = input;
+}
+
 
 template<typename Type>
 Type Clink<Type>::get(int index){
@@ -17,10 +22,12 @@ Type Clink<Type>::get(int index){
 
 template<typename Type>
 bool Clink<Type>::set_placer(int index){
+	if (index < 0) return false;
+
 	node_placer = element_first;
 
 	for (int i = 0; i < index; i++){
-		if (node_placer->next == nullptr && i < index) return false;
+		if (node_placer->next == nullptr && i < index) return false; //if list ended before index reached
 		node_placer = node_placer->next;
 	}
 
@@ -30,14 +37,33 @@ bool Clink<Type>::set_placer(int index){
 template<typename Type>
 bool Clink<Type>::insert(Type input, int index) {
 
-	if (!set_placer(index - 1)) return false;
-
 	Node<Type>* node_new = new Node<Type>(input);
 
-	node_new->next = node_placer->next;
-	node_placer->next = node_new;
+	if (index == 0) { 
+		node_new->next = element_first;
+		element_first = node_new;
 
-	return true;
+		elements++;
+		return true;
+	}
+
+	else if (index == elements - 1) {
+		node_new->next = element_last;
+		element_last = node_new;
+
+		elements++;
+		return true;
+	}
+
+	else if (set_placer(index - 1)){
+		node_new->next = node_placer->next;
+		node_placer->next = node_new;
+
+		elements++;
+		return true;
+	}
+
+	return false;
 }
 
 template<typename Type>
@@ -49,6 +75,8 @@ bool Clink<Type>::remove(int index){
 	if (!set_placer(index - 1)) return false;
 
 	node_placer->next = node_placer->next->next; //Yeaugh
+
+	elements--;
 	return true;
 }
 
@@ -56,22 +84,25 @@ bool Clink<Type>::remove(int index){
 template<typename Type>
 void Clink<Type>::fill(Type input){
 	set_placer(0);
-
-	while (node_placer->next != nullptr){
-		node_placer->value = input;
-		node_placer = node_placer->next;
-	}
+	
+	while (increment_placer()) node_placer->value = input;
 }
 
 template<typename Type>
 void Clink<Type>::clear(){
-	Type * buffer = new Type[elements];
+	if (elements == 0) return;
+
+	Node<Type>** buffer = new Node<Type>*[elements];
 
 	int index = 0;
 	set_placer(index);
 
-	while (increment_placer()){
-		buffer[index] = get_placer();
+	//Save pointers to each node in array
+	while (increment_placer()) buffer[index++] = node_placer;
+
+	//Call destructors on every node
+	while (index > 0){
+		buffer[--index]->~Node();
 	}
 	delete[] buffer;
 }
@@ -83,27 +114,21 @@ void Clink<Type>::sort(){
 
 template<typename Type>
 bool Clink<Type>::increment_placer(){
-	if (node_placer->next == nullptr) return false;
+	//If next node DNE, return
+	if (node_placer->next) return false;
 
 	node_placer = node_placer->next;
 	return true;
-
 }
 
 
 template<typename Type>
-void Clink<Type>::operator=(Clink& input){
-	elements = input.get_elements();
-
-	Type * buffer = new Type[length];
-
-	//Copy elements of data into new array
-	for (int i = 0; i <= elements - 1; i++){
-		buffer[i] = input[i];
+void Clink<Type>::operator=(Clink<Type>& input){
+	clear();
+	input.set_placer(0);
+	while (input.increment_placer()){
+		push_front(input.get_placer());
 	}
-
-	delete[] ptr;
-	ptr = buffer;
 }
 
 template<typename Type>
