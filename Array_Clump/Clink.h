@@ -34,7 +34,9 @@ public:
 	Clink(Clink<Type>& input);
 	~Clink();
 
-	Type get(int index);
+	Type& get(int index);
+	Type get(int index) const;
+
 	bool set_placer(int index);
 
 	Type get_placer() { return node_placer->value; }
@@ -46,10 +48,8 @@ public:
 	void fill(Type);
 	void clear();
 
-	void sort();
-
 	void operator=(Clink& input);
-	Type operator[](int index);
+	Type& operator[](int index);
 	bool operator==(Clink& input);
 };
 

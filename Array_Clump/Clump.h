@@ -18,7 +18,9 @@ public:
 	Clump(Clump& input);
 	~Clump();
 
-	Type get(int index);
+	Type& get(int index);
+	Type get(int index) const;
+
 	int get_length() const { return length; }
 
 	//Mutators
@@ -28,10 +30,8 @@ public:
 	void fill(Type);
 	void clear();
 
-	void sort();
-
 	void operator=(const Clump& input);
-	Type operator[](int index);
+	Type& operator[](int index);
 	bool operator==(const Clump& input);
 };
 

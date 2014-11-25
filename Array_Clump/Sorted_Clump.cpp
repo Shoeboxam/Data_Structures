@@ -1,7 +1,7 @@
 #include "Sorted_Clump.h"
 
 template<typename Type>
-Sorted_Clump<Type>::Sorted_Clump(Clump& input){
+Sorted_Clump<Type>::Sorted_Clump(Clump<Type> input){
 	this = input.sort();
 }
 

@@ -41,7 +41,7 @@ void Clump<Type>::reallocate(){
 }
 
 template<typename Type>
-Type Clump<Type>::get(int index){
+Type& Clump<Type>::get(int index){
 	if (index < 0 || index > elements - 1){
 		throw std::out_of_range("Error: index out of bounds");
 	}
@@ -49,30 +49,13 @@ Type Clump<Type>::get(int index){
 	return ptr[index];
 }
 
-
 template<typename Type>
-void Clump<Type>::sort(){
-	int gap = elements;
-	float shrink = 1.3;
-	bool swapped = false;
-
-	while (gap != 1 || swapped == true){
-		gap /= shrink;
-		if (gap < 1) gap = 1;
-
-		swapped = false;
-		for (int index = 0; index + gap < elements; index++){
-			if (ptr[index] > ptr[index + gap]){
-
-				//Swap!
-				Type buffer = ptr[index + gap];
-				ptr[index + gap] = ptr[index];
-				ptr[index] = buffer;
-
-				swapped = true;
-			}
-		}
+Type Clump<Type>::get(int index) const{
+	if (index < 0 || index > elements - 1){
+		throw std::out_of_range("Error: index out of bounds");
 	}
+
+	return ptr[index];
 }
 
 
@@ -145,7 +128,7 @@ void Clump<Type>::operator=(const Clump& input){
 }
 
 template<typename Type>
-Type Clump<Type>::operator[](int index){
+Type& Clump<Type>::operator[](int index){
 	return get(index);
 }
 

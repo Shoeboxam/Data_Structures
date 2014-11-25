@@ -11,7 +11,17 @@ Clink<Type>::Clink(Clink<Type>& input){
 
 
 template<typename Type>
-Type Clink<Type>::get(int index){
+Type& Clink<Type>::get(int index){
+	Node<Type>* element_current = element_first;
+
+	for (int i = 0; i < index && element_current->next != nullptr; i++){
+		element_current = element_current->next;
+	}
+	return element_current->value;
+}
+
+template<typename Type>
+Type Clink<Type>::get(int index) const{
 	Node<Type>* element_current = element_first;
 
 	for (int i = 0; i < index && element_current->next != nullptr; i++){
@@ -102,11 +112,6 @@ void Clink<Type>::clear(){
 }
 
 template<typename Type>
-void Clink<Type>::sort(){
-
-}
-
-template<typename Type>
 bool Clink<Type>::set_placer(int index){
 	if (index < 0) return false;
 
@@ -141,7 +146,7 @@ void Clink<Type>::operator=(Clink<Type>& input){
 }
 
 template<typename Type>
-Type Clink<Type>::operator[](int index){
+Type& Clink<Type>::operator[](int index){
 	return get(index);
 }
 
