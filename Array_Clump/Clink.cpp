@@ -75,7 +75,9 @@ template<typename Type>
 void Clink<Type>::fill(Type input){
 	set_placer(0);
 	
-	while (increment_placer()) node_placer->value = input;
+	do {
+		node_placer->value = input;
+	} while (increment_placer());
 }
 
 template<typename Type>
@@ -92,9 +94,11 @@ void Clink<Type>::clear(){
 
 	//Call destructors on every node
 	while (index > 0){
-		delete &buffer[--index];
+		delete buffer[--index];
 	}
 	delete[] buffer;
+
+	elements = 0;
 }
 
 template<typename Type>
@@ -131,9 +135,9 @@ void Clink<Type>::operator=(Clink<Type>& input){
 	clear();
 	input.set_placer(0);
 
-	while (input.increment_placer()){
+	do {
 		push_back(input.get_placer());
-	}
+	} while (input.increment_placer());
 }
 
 template<typename Type>

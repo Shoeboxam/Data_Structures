@@ -19,7 +19,7 @@ class Clink : public Access_API<Type> {
 
 		Node(){ next = nullptr; }
 		Node(const Type& input){ value = input; next = nullptr; }
-		~Node(){ delete next; }
+		~Node(){ }
 	};
 
 	Node<Type>* element_first = new Node<Type>;

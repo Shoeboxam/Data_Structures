@@ -12,7 +12,8 @@ int generateValue(int min, int max){
 	return min + rand() % (max - min + 1);
 }
 
-void output(Clink<int>& input){
+template<typename Type>
+void output(Type& input){
 	for (int i = 0; i < input.get_elements(); i++){
 		cout << input[i] << " ";
 	}
@@ -70,13 +71,14 @@ int main(){
 	randoms.sort();
 	output(randoms);
 
-	cout << endl << "Fill with zeros: " << endl;
-	//randoms.fill(0);
-	output(randoms);
-
+	randoms.set_placer(2);
 	cout << endl << "Node Placer: " << randoms.get_placer() << endl;
 	cout << endl << randoms.increment_placer();
 	cout << endl << "Node Placer: " << randoms.get_placer() << endl;
+
+	cout << endl << "Fill with zeros: " << endl;
+	randoms.fill(0);
+	output(randoms);
 
 	cout << endl << "Clear: " << endl;
 	randoms.clear();
