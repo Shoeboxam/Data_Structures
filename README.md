@@ -1,7 +1,7 @@
 C++ Data Containers
 =====================
 
-Clink - Linked list implementation
+Clink - Linked list implementation  
 Clump - C-array container
 
 Dynamic reallocation for resizable arrays  
