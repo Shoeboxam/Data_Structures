@@ -26,7 +26,7 @@ int main(){
 	Clink<int> randoms;
 
 	for (int i = 0; i < 10; i++){
-		cout << randoms.push_back(generateValue(0, 100)) << endl;
+		cout << randoms.push_front(generateValue(0, 100)) << endl;
 	}
 
 	cout << endl;
@@ -34,7 +34,7 @@ int main(){
 	cout << "Explicit output 2: " << randoms[1] << endl;
 	cout << "Explicit output 3: " << randoms[2] << endl;
 
-	cout << "3 Random numbers: " << endl;
+	cout << "Output all: " << endl;
 	output(randoms);
 
 	cout << endl << "Prepend 785: " << endl;
@@ -58,9 +58,10 @@ int main(){
 	cout << endl << "Front: " << randoms.front() << endl;
 	cout << endl << "Back: " << randoms.back() << endl;
 
-
+	cout << endl << "Node Placer: " << randoms.get_placer() << endl;
 	Clink<int> randoms2 = randoms;
 	cout << endl << "Clump == identical clump?  " << (randoms2==randoms) << endl;
+	output(randoms2);
 
 	randoms2.push_back(4);
 	cout << "Clump == modified clump?   " << (randoms2 == randoms) << endl;
@@ -72,6 +73,10 @@ int main(){
 	cout << endl << "Fill with zeros: " << endl;
 	//randoms.fill(0);
 	output(randoms);
+
+	cout << endl << "Node Placer: " << randoms.get_placer() << endl;
+	cout << endl << randoms.increment_placer();
+	cout << endl << "Node Placer: " << randoms.get_placer() << endl;
 
 	cout << endl << "Clear: " << endl;
 	randoms.clear();

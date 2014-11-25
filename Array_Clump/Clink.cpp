@@ -21,23 +21,13 @@ Type Clink<Type>::get(int index){
 }
 
 template<typename Type>
-bool Clink<Type>::set_placer(int index){
-	if (index < 0) return false;
-
-	node_placer = element_first;
-
-	for (int i = 0; i < index; i++){
-		if (node_placer->next == nullptr && i < index) return false; //if list ended before index reached
-		node_placer = node_placer->next;
-	}
-
-	return true;
-}
-
-template<typename Type>
 bool Clink<Type>::insert(Type input, int index) {
 
 	Node<Type>* node_new = new Node<Type>(input);
+
+	if (elements == 0) {
+		element_last = node_new;
+	}
 
 	if (index == 0) { 
 		node_new->next = element_first;
@@ -47,8 +37,8 @@ bool Clink<Type>::insert(Type input, int index) {
 		return true;
 	}
 
-	else if (index == elements - 1) {
-		node_new->next = element_last;
+	else if (index == elements) {
+		element_last->next = node_new;
 		element_last = node_new;
 
 		elements++;
@@ -102,7 +92,7 @@ void Clink<Type>::clear(){
 
 	//Call destructors on every node
 	while (index > 0){
-		buffer[--index]->~Node();
+		delete &buffer[--index];
 	}
 	delete[] buffer;
 }
@@ -113,9 +103,23 @@ void Clink<Type>::sort(){
 }
 
 template<typename Type>
+bool Clink<Type>::set_placer(int index){
+	if (index < 0) return false;
+
+	node_placer = element_first;
+
+	for (int i = 0; i < index; i++){
+		if (node_placer->next == nullptr && i < index) return false; //if list ended before index reached
+		node_placer = node_placer->next;
+	}
+
+	return true;
+}
+
+template<typename Type>
 bool Clink<Type>::increment_placer(){
 	//If next node DNE, return
-	if (node_placer->next) return false;
+	if (!(node_placer->next)) return false;
 
 	node_placer = node_placer->next;
 	return true;
@@ -126,8 +130,9 @@ template<typename Type>
 void Clink<Type>::operator=(Clink<Type>& input){
 	clear();
 	input.set_placer(0);
+
 	while (input.increment_placer()){
-		push_front(input.get_placer());
+		push_back(input.get_placer());
 	}
 }
 

@@ -3,6 +3,11 @@
 
 #include "Access_API.h"
 
+//TODO: Equivalency
+//TODO: Fill
+//TODO: Clear
+//TODO: Sort
+
 template<typename Type>
 class Clink : public Access_API<Type> {
 
@@ -14,13 +19,11 @@ class Clink : public Access_API<Type> {
 
 		Node(){ next = nullptr; }
 		Node(const Type& input){ value = input; next = nullptr; }
-		~Node(){
-			delete next;
-		}
+		~Node(){ delete next; }
 	};
 
-	Node<Type>* element_first;
-	Node<Type>* element_last;
+	Node<Type>* element_first = new Node<Type>;
+	Node<Type>* element_last = new Node<Type>;
 
 	Node<Type>* node_placer;
 
