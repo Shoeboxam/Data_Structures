@@ -132,6 +132,11 @@ Type& Clump<Type>::operator[](int index){
 	return get(index);
 }
 
+template<typename Type>
+Type Clump<Type>::operator[](int index) const {
+	return get(index);
+}
+
 
 template<typename Type>
 bool Clump<Type>::operator==(const Clump& input){

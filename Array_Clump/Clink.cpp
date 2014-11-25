@@ -151,6 +151,11 @@ Type& Clink<Type>::operator[](int index){
 }
 
 template<typename Type>
+Type Clink<Type>::operator[](int index) const {
+	return get(index);
+}
+
+template<typename Type>
 bool Clink<Type>::operator==(Clink& input){
 	if (elements != input.get_elements()) return false;
 	

@@ -26,27 +26,17 @@ int main(){
 
 	Clink<int> randoms;
 
+	cout << endl << "Append ten random numbers: " << endl;
 	for (int i = 0; i < 10; i++){
-		cout << randoms.push_front(generateValue(0, 100)) << endl;
+		randoms.push_back(generateValue(0, 100));
 	}
-
-	cout << endl;
-	cout << "Explicit output 1: " << randoms[0] << endl;
-	cout << "Explicit output 2: " << randoms[1] << endl;
-	cout << "Explicit output 3: " << randoms[2] << endl;
-
-	cout << "Output all: " << endl;
 	output(randoms);
 
 	cout << endl << "Prepend 785: " << endl;
 	randoms.push_front(785);
 	output(randoms);
 
-	cout << endl << "Append five: " << endl;
-	randoms.push_back(5);
-	output(randoms);
-
-	cout << endl << "Explicit output 1: " << randoms[1] << endl;
+	cout << endl << "Subscript accessor [1]: " << randoms[1] << endl;
 
 	cout << endl << "Remove index 2: " << endl;
 	randoms.remove(2);
@@ -61,20 +51,23 @@ int main(){
 
 	cout << endl << "Node Placer: " << randoms.get_placer() << endl;
 	Clink<int> randoms2 = randoms;
-	cout << endl << "Clump == identical clump?  " << (randoms2==randoms) << endl;
-	output(randoms2);
+	cout << endl << "Clump == copy constructed clump?  " << (randoms2==randoms) << endl;
 
 	randoms2.push_back(4);
 	cout << "Clump == modified clump?   " << (randoms2 == randoms) << endl;
 
-	cout << "Sorted" << endl;
+	cout << endl << "Sorted: " << endl;
 	randoms.sort();
 	output(randoms);
 
+	cout << endl << "Const duplicate:" << endl;
+	const Clink<int> randoms3(randoms);
+	output(randoms3);
+
 	randoms.set_placer(2);
 	cout << endl << "Node Placer: " << randoms.get_placer() << endl;
-	cout << endl << randoms.increment_placer();
-	cout << endl << "Node Placer: " << randoms.get_placer() << endl;
+	randoms.increment_placer();
+	cout << "Incremented Node Placer: " << randoms.get_placer() << endl;
 
 	cout << endl << "Fill with zeros: " << endl;
 	randoms.fill(0);

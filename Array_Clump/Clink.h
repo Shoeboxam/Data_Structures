@@ -48,8 +48,10 @@ public:
 	void fill(Type);
 	void clear();
 
-	void operator=(Clink& input);
 	Type& operator[](int index);
+	Type operator[](int index) const;
+
+	void operator=(Clink& input);
 	bool operator==(Clink& input);
 };
 

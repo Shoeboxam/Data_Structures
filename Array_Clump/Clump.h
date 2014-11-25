@@ -30,8 +30,10 @@ public:
 	void fill(Type);
 	void clear();
 
-	void operator=(const Clump& input);
 	Type& operator[](int index);
+	Type operator[](int index) const;
+
+	void operator=(const Clump& input);
 	bool operator==(const Clump& input);
 };
 

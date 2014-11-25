@@ -19,8 +19,8 @@ public:
 	virtual int get_elements() const { return elements; }
 	virtual bool is_empty() const { return elements == 0; }
 
-	virtual Type front() { return get(0); }
-	virtual Type back() { return get(elements - 1); }
+	virtual Type front() const { return get(0); }
+	virtual Type back() const { return get(elements - 1); }
 
 	//Mutators
 	bool push_back(Type value) { return insert(value, elements); }
