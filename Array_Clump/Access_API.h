@@ -35,29 +35,9 @@ public:
 	virtual void fill(Type) = 0;
 	virtual void clear() = 0;
 
-	virtual void sort(){
-		int gap = elements;
-		float shrink = 1.3;
-		bool swapped = false;
-
-		while (gap != 1 || swapped == true){
-			gap /= shrink;
-			if (gap < 1) gap = 1;
-
-			swapped = false;
-			for (int index = 0; index + gap < elements; index++){
-				if (get(index) > get(index + gap)){
-
-					//Swap!
-					Type buffer = get(index + gap);
-					get(index + gap) = get(index);
-					get(index) = buffer;
-
-					swapped = true;
-				}
-			}
-		}
-	}
+	virtual void sort();
 };
+
+#include "Access_API.cpp"
 
 #endif
