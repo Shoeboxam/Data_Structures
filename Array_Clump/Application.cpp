@@ -1,6 +1,7 @@
 #include <iostream>
 using std::cout;
 using std::endl;
+using std::ostream;
 
 #include <cstdlib>
 #include <ctime>
@@ -9,9 +10,23 @@ using std::endl;
 #include "SimpleLinked.h"
 #include "SimpleLinked_Rollup.h"
 
+
 int generateValue(int min, int max){
 	return min + rand() % (max - min + 1);
 }
+
+struct DataRollup {
+	float value = generateValue(0, 100);
+	float sum;
+
+	bool operator<(DataRollup& input){
+		return value < input.value;
+	}
+
+	bool operator>(DataRollup& input){
+		return value > input.value;
+	}
+};
 
 template<typename Type>
 void output(Type& input){
@@ -21,10 +36,17 @@ void output(Type& input){
 	cout << endl;
 }
 
-template<typename Type>
-void output_sums(SimpleLinked_Rollup<Type>& input){
+void output_values(SimpleLinked_Rollup<DataRollup>& input){
 	for (int i = 0; i < input.get_elements(); i++){
-		cout << input.get_sum(i) << " ";
+		cout << input.get_value(i) << " ";
+	}
+	cout << endl;
+}
+
+template<typename Type>
+void output_sums(SimpleLinked_Rollup<DataRollup>& input){
+	for (int i = 0; i < input.get_elements(); i++){
+		cout << SimpleLinked_Rollup<int>(input.get_sum(i)) << " ";
 	}
 	cout << endl;
 }
@@ -86,13 +108,15 @@ int main(){
 	randoms.clear();
 	output(randoms);
 
-	SimpleLinked_Rollup<int> randoms_rolled;
+	SimpleLinked_Rollup<DataRollup> randoms_rolled;
 
 	for (int i = 0; i < 10; i++){
-		randoms_rolled.push_back(generateValue(0, 100));
+		randoms_rolled.push_back(*new DataRollup());
 	}
-	output(randoms_rolled);
-	output_sums(randoms_rolled);
+	output_values(randoms_rolled);
+
+	randoms_rolled.set_placer(5);
+	//output_sums(randoms_rolled);
 
 	system("pause");
 	return 0;

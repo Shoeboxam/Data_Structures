@@ -8,12 +8,6 @@ class SimpleLinked_Rollup : public SimpleLinked<Type> {
 	
 	void rollup(int index);
 
-	template<typename Type>
-	class Node : public SimpleLinked<Type>::Node {
-	public:
-		Type sum;
-	};
-
 public:
 
 	template<typename Type>

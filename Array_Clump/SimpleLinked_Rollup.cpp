@@ -1,7 +1,7 @@
 
 template<typename Type>
 void rollup(int index){
-	set_placer(index);
+	set_placer(index - (index > 0));
 
 	Type sum_last;
 	bool loop_continue;
