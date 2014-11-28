@@ -1,5 +1,5 @@
-#ifndef CLINK_H
-#define CLINK_H
+#ifndef SimpleLinked_H
+#define SimpleLinked_H
 
 #include "Access_API.h"
 
@@ -9,7 +9,7 @@
 //TODO: Sort
 
 template<typename Type>
-class Clink : public Access_API<Type> {
+class SimpleLinked : public Access_API<Type> {
 
 	template<typename Type>
 	class Node {
@@ -30,9 +30,9 @@ class Clink : public Access_API<Type> {
 
 public:
 
-	Clink(){}
-	Clink(Clink<Type>& input);
-	~Clink();
+	SimpleLinked(){}
+	SimpleLinked(SimpleLinked<Type>& input);
+	~SimpleLinked();
 
 	Type& get(int index);
 	Type get(int index) const;
@@ -51,9 +51,9 @@ public:
 	Type& operator[](int index);
 	Type operator[](int index) const;
 
-	void operator=(Clink& input);
-	bool operator==(Clink& input);
+	void operator=(SimpleLinked& input);
+	bool operator==(SimpleLinked& input);
 };
 
-#include "Clink.cpp"
+#include "SimpleLinked.cpp"
 #endif

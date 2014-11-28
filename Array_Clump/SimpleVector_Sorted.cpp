@@ -1,13 +1,13 @@
-#include "Sorted_Clump.h"
+#include "SimpleVector_Sorted.h"
 
 template<typename Type>
-Sorted_Clump<Type>::Sorted_Clump(Clump<Type> input){
+Sorted_SimpleVector<Type>::Sorted_SimpleVector(SimpleVector<Type> input){
 	this = input.sort();
 }
 
 
 template<typename Type>
-bool Sorted_Clump<Type>::insert(Type value){
+bool Sorted_SimpleVector<Type>::insert(Type value){
 
 	//Ensure adequate space is available in array
 	if (elements >= length) reallocate();

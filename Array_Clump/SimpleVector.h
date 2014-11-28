@@ -1,11 +1,11 @@
-#ifndef CLUMP_H
-#define CLUMP_H
+#ifndef SimpleVector_H
+#define SimpleVector_H
 
 #include "Access_API.h"
 #include <iostream>
 
 template<typename Type>
-class Clump : public Access_API<Type> {
+class SimpleVector : public Access_API<Type> {
 protected:
 	Type * ptr = new Type[length];
 
@@ -14,9 +14,9 @@ protected:
 	int length;
 
 public:
-	Clump(){ length = 1; }
-	Clump(Clump& input);
-	~Clump();
+	SimpleVector(){ length = 1; }
+	SimpleVector(SimpleVector& input);
+	~SimpleVector();
 
 	Type& get(int index);
 	Type get(int index) const;
@@ -33,10 +33,10 @@ public:
 	Type& operator[](int index);
 	Type operator[](int index) const;
 
-	void operator=(const Clump& input);
-	bool operator==(const Clump& input);
+	void operator=(const SimpleVector& input);
+	bool operator==(const SimpleVector& input);
 };
 
-#include "Clump.cpp"
+#include "SimpleVector.cpp"
 
 #endif

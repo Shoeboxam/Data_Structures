@@ -3,7 +3,7 @@
 using std::cout;
 
 template<typename Type>
-Clump<Type>::Clump(Clump& input){
+SimpleVector<Type>::SimpleVector(SimpleVector& input){
 
 	elements = input.get_elements();
 	length = input.get_length();
@@ -20,12 +20,12 @@ Clump<Type>::Clump(Clump& input){
 }
 
 template<typename Type>
-Clump<Type>::~Clump(){
+SimpleVector<Type>::~SimpleVector(){
 	delete[] ptr;
 }
 
 template<typename Type>
-void Clump<Type>::reallocate(){
+void SimpleVector<Type>::reallocate(){
 	//Create new array with double length
 	length = elements * 2;
 	Type * buffer = new Type[length];
@@ -41,7 +41,7 @@ void Clump<Type>::reallocate(){
 }
 
 template<typename Type>
-Type& Clump<Type>::get(int index){
+Type& SimpleVector<Type>::get(int index){
 	if (index < 0 || index > elements - 1){
 		throw std::out_of_range("Error: index out of bounds");
 	}
@@ -50,7 +50,7 @@ Type& Clump<Type>::get(int index){
 }
 
 template<typename Type>
-Type Clump<Type>::get(int index) const{
+Type SimpleVector<Type>::get(int index) const{
 	if (index < 0 || index > elements - 1){
 		throw std::out_of_range("Error: index out of bounds");
 	}
@@ -60,7 +60,7 @@ Type Clump<Type>::get(int index) const{
 
 
 template<typename Type>
-bool Clump<Type>::insert(Type value, int index){
+bool SimpleVector<Type>::insert(Type value, int index){
 	//Check if value is in range
 	if (index < 0 || index > elements) return false;
 
@@ -81,7 +81,7 @@ bool Clump<Type>::insert(Type value, int index){
 }
 
 template<typename Type>
-bool Clump<Type>::remove(int index){
+bool SimpleVector<Type>::remove(int index){
 
 	if (index > elements) return false;
 	if (elements >= length/2) reallocate();
@@ -97,14 +97,14 @@ bool Clump<Type>::remove(int index){
 }
 
 template<typename Type>
-void Clump<Type>::fill(Type value){
+void SimpleVector<Type>::fill(Type value){
 	for (int i = 0; i < elements; i++){
 		ptr[i] = value;
 	}
 }
 
 template<typename Type>
-void Clump<Type>::clear(){
+void SimpleVector<Type>::clear(){
 	for (int i = elements - 1; i >= 0; i--){
 		ptr[i] = 0;
 	}
@@ -112,7 +112,7 @@ void Clump<Type>::clear(){
 }
 
 template<typename Type>
-void Clump<Type>::operator=(const Clump& input){
+void SimpleVector<Type>::operator=(const SimpleVector& input){
 	elements = input.get_elements();
 	length = input.get_length();
 
@@ -128,18 +128,18 @@ void Clump<Type>::operator=(const Clump& input){
 }
 
 template<typename Type>
-Type& Clump<Type>::operator[](int index){
+Type& SimpleVector<Type>::operator[](int index){
 	return get(index);
 }
 
 template<typename Type>
-Type Clump<Type>::operator[](int index) const {
+Type SimpleVector<Type>::operator[](int index) const {
 	return get(index);
 }
 
 
 template<typename Type>
-bool Clump<Type>::operator==(const Clump& input){
+bool SimpleVector<Type>::operator==(const SimpleVector& input){
 	if (elements != input.get_elements()) return false;
 
 	for (int i = 0; i <= elements - 1; i++){

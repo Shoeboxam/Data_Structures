@@ -1,17 +1,17 @@
 
 template<typename Type>
-Clink<Type>::~Clink(){
+SimpleLinked<Type>::~SimpleLinked(){
 	clear();
 }
 
 template<typename Type>
-Clink<Type>::Clink(Clink<Type>& input){
+SimpleLinked<Type>::SimpleLinked(SimpleLinked<Type>& input){
 	*this = input;
 }
 
 
 template<typename Type>
-Type& Clink<Type>::get(int index){
+Type& SimpleLinked<Type>::get(int index){
 	Node<Type>* element_current = element_first;
 
 	for (int i = 0; i < index && element_current->next != nullptr; i++){
@@ -21,7 +21,7 @@ Type& Clink<Type>::get(int index){
 }
 
 template<typename Type>
-Type Clink<Type>::get(int index) const{
+Type SimpleLinked<Type>::get(int index) const{
 	Node<Type>* element_current = element_first;
 
 	for (int i = 0; i < index && element_current->next != nullptr; i++){
@@ -31,7 +31,7 @@ Type Clink<Type>::get(int index) const{
 }
 
 template<typename Type>
-bool Clink<Type>::insert(Type input, int index) {
+bool SimpleLinked<Type>::insert(Type input, int index) {
 
 	Node<Type>* node_new = new Node<Type>(input);
 
@@ -67,7 +67,7 @@ bool Clink<Type>::insert(Type input, int index) {
 }
 
 template<typename Type>
-bool Clink<Type>::remove(int index){
+bool SimpleLinked<Type>::remove(int index){
 	if (index == 0) {
 		element_first = element_first->next; //TODO: Fix memory leak here
 	}
@@ -82,7 +82,7 @@ bool Clink<Type>::remove(int index){
 
 
 template<typename Type>
-void Clink<Type>::fill(Type input){
+void SimpleLinked<Type>::fill(Type input){
 	set_placer(0);
 	
 	do {
@@ -91,7 +91,7 @@ void Clink<Type>::fill(Type input){
 }
 
 template<typename Type>
-void Clink<Type>::clear(){
+void SimpleLinked<Type>::clear(){
 	if (elements == 0) return;
 
 	Node<Type>** buffer = new Node<Type>*[elements];
@@ -112,7 +112,7 @@ void Clink<Type>::clear(){
 }
 
 template<typename Type>
-bool Clink<Type>::set_placer(int index){
+bool SimpleLinked<Type>::set_placer(int index){
 	if (index < 0) return false;
 
 	node_placer = element_first;
@@ -126,7 +126,7 @@ bool Clink<Type>::set_placer(int index){
 }
 
 template<typename Type>
-bool Clink<Type>::increment_placer(){
+bool SimpleLinked<Type>::increment_placer(){
 	//If next node DNE, return
 	if (!(node_placer->next)) return false;
 
@@ -136,7 +136,7 @@ bool Clink<Type>::increment_placer(){
 
 
 template<typename Type>
-void Clink<Type>::operator=(Clink<Type>& input){
+void SimpleLinked<Type>::operator=(SimpleLinked<Type>& input){
 	clear();
 	input.set_placer(0);
 
@@ -146,17 +146,17 @@ void Clink<Type>::operator=(Clink<Type>& input){
 }
 
 template<typename Type>
-Type& Clink<Type>::operator[](int index){
+Type& SimpleLinked<Type>::operator[](int index){
 	return get(index);
 }
 
 template<typename Type>
-Type Clink<Type>::operator[](int index) const {
+Type SimpleLinked<Type>::operator[](int index) const {
 	return get(index);
 }
 
 template<typename Type>
-bool Clink<Type>::operator==(Clink& input){
+bool SimpleLinked<Type>::operator==(SimpleLinked& input){
 	if (elements != input.get_elements()) return false;
 	
 	set_placer(0);

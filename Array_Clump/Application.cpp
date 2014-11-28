@@ -5,8 +5,8 @@ using std::endl;
 #include <cstdlib>
 #include <ctime>
 
-#include "Clump.h"
-#include "Clink.h"
+#include "SimpleVector.h"
+#include "SimpleLinked.h"
 
 int generateValue(int min, int max){
 	return min + rand() % (max - min + 1);
@@ -24,7 +24,7 @@ int main(){
 	//Seed random number generator
 	srand(static_cast<int>(time(NULL)));
 
-	Clink<int> randoms;
+	SimpleLinked<int> randoms;
 
 	cout << endl << "Append ten random numbers: " << endl;
 	for (int i = 0; i < 10; i++){
@@ -50,18 +50,18 @@ int main(){
 	cout << endl << "Back: " << randoms.back() << endl;
 
 	cout << endl << "Node Placer: " << randoms.get_placer() << endl;
-	Clink<int> randoms2 = randoms;
-	cout << endl << "Clump == copy constructed clump?  " << (randoms2==randoms) << endl;
+	SimpleLinked<int> randoms2 = randoms;
+	cout << endl << "SimpleVector == copy constructed SimpleVector?  " << (randoms2==randoms) << endl;
 
 	randoms2.push_back(4);
-	cout << "Clump == modified clump?   " << (randoms2 == randoms) << endl;
+	cout << "SimpleVector == modified SimpleVector?   " << (randoms2 == randoms) << endl;
 
 	cout << endl << "Sorted: " << endl;
 	randoms.sort();
 	output(randoms);
 
 	cout << endl << "Const duplicate:" << endl;
-	const Clink<int> randoms3(randoms);
+	const SimpleLinked<int> randoms3(randoms);
 	output(randoms3);
 
 	randoms.set_placer(2);

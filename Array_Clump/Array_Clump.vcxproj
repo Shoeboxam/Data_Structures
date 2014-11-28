@@ -80,19 +80,19 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Application.cpp" />
-    <ClCompile Include="Clink.cpp">
+    <ClCompile Include="SimpleLinked.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Clump.cpp">
+    <ClCompile Include="SimpleVector.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Sorted_Clump.cpp" />
+    <ClCompile Include="SimpleVector_Sorted.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Access_API.h" />
-    <ClInclude Include="Clink.h" />
-    <ClInclude Include="Clump.h" />
-    <ClInclude Include="Sorted_Clump.h" />
+    <ClInclude Include="SimpleLinked.h" />
+    <ClInclude Include="SimpleVector.h" />
+    <ClInclude Include="SimpleVector_Sorted.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

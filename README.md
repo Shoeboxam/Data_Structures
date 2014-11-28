@@ -1,8 +1,9 @@
 C++ Data Containers
 =====================
 
-Clink - Linked list implementation  
-Clump - C-array container
+SimpleLinked - Linked list implementation  
+SimpleVector - C-array container
+SimpleVector_Sorted - insertion sort on insertions
 
 Dynamic reallocation for resizable arrays  
 Element tracking  
