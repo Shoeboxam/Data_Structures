@@ -7,6 +7,7 @@ using std::endl;
 
 #include "SimpleVector.h"
 #include "SimpleLinked.h"
+#include "SimpleLinked_Rollup.h"
 
 int generateValue(int min, int max){
 	return min + rand() % (max - min + 1);
@@ -16,6 +17,14 @@ template<typename Type>
 void output(Type& input){
 	for (int i = 0; i < input.get_elements(); i++){
 		cout << input[i] << " ";
+	}
+	cout << endl;
+}
+
+template<typename Type>
+void output_sums(SimpleLinked_Rollup<Type>& input){
+	for (int i = 0; i < input.get_elements(); i++){
+		cout << input.get_sum(i) << " ";
 	}
 	cout << endl;
 }
@@ -76,6 +85,14 @@ int main(){
 	cout << endl << "Clear: " << endl;
 	randoms.clear();
 	output(randoms);
+
+	SimpleLinked_Rollup<int> randoms_rolled;
+
+	for (int i = 0; i < 10; i++){
+		randoms_rolled.push_back(generateValue(0, 100));
+	}
+	output(randoms_rolled);
+	output_sums(randoms_rolled);
 
 	system("pause");
 	return 0;

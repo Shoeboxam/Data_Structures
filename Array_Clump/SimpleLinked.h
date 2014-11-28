@@ -3,11 +3,6 @@
 
 #include "Access_API.h"
 
-//TODO: Equivalency
-//TODO: Fill
-//TODO: Clear
-//TODO: Sort
-
 template<typename Type>
 class SimpleLinked : public Access_API<Type> {
 
@@ -56,4 +51,5 @@ public:
 };
 
 #include "SimpleLinked.cpp"
+
 #endif

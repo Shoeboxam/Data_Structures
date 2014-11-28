@@ -2,8 +2,8 @@ C++ Data Containers
 =====================
 
 SimpleLinked - Linked list implementation  
-SimpleVector - C-array container
-SimpleVector_Sorted - insertion sort on insertions
+SimpleVector - C-array container  
+SimpleVector_Sorted - insertion sort on insertions  
 
 Dynamic reallocation for resizable arrays  
 Element tracking  

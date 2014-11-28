@@ -30,6 +30,9 @@
     <ClCompile Include="SimpleVector_Sorted.cpp">
       <Filter>Resource Files\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SimpleLinked_Rollup.cpp">
+      <Filter>Resource Files\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Access_API.h">
@@ -42,6 +45,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SimpleVector_Sorted.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleLinked_Rollup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

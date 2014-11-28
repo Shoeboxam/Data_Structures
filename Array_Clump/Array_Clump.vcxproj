@@ -83,6 +83,9 @@
     <ClCompile Include="SimpleLinked.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="SimpleLinked_Rollup.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="SimpleVector.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -91,6 +94,7 @@
   <ItemGroup>
     <ClInclude Include="Access_API.h" />
     <ClInclude Include="SimpleLinked.h" />
+    <ClInclude Include="SimpleLinked_Rollup.h" />
     <ClInclude Include="SimpleVector.h" />
     <ClInclude Include="SimpleVector_Sorted.h" />
   </ItemGroup>
