@@ -26,6 +26,10 @@ struct DataRollup {
 	bool operator>(DataRollup& input){
 		return value > input.value;
 	}
+
+	friend ostream& operator<<(ostream& out_stream, DataRollup& input){
+		return out_stream << input.value;
+	}
 };
 
 template<typename Type>
@@ -38,7 +42,7 @@ void output(Type& input){
 
 void output_values(SimpleLinked_Rollup<DataRollup>& input){
 	for (int i = 0; i < input.get_elements(); i++){
-		cout << input.get_value(i) << " ";
+		cout << input.get(i) << " ";
 	}
 	cout << endl;
 }
