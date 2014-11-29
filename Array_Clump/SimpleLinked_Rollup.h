@@ -3,8 +3,29 @@
 
 #include "SimpleLinked.h"
 
+class DataRollup {
+public:
+	float value;
+	float sum;
+
+	DataRollup(){}
+	DataRollup(float value_req) : value(value_req), sum(0) {}
+
+	bool operator<(DataRollup& input){
+		return value < input.value;
+	}
+
+	bool operator>(DataRollup& input){
+		return value > input.value;
+	}
+
+	friend ostream& operator<<(ostream& out_stream, DataRollup& input){
+		return out_stream << input.value;
+	}
+};
+
 template<typename Type>
-class SimpleLinked_Rollup : public SimpleLinked<Type> {
+class SimpleLinked_Rollup : public SimpleLinked<DataRollup> {
 	
 	void rollup(int index);
 
