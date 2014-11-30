@@ -42,8 +42,8 @@ public:
 	Type get_placer() { return node_placer->value; }
 	bool increment_placer();
 
-	virtual bool insert(Type value, int index);
-	virtual bool remove(int index);
+	bool insert(Type value, int index);
+	bool remove(int index);
 
 	void fill(Type);
 	void clear();

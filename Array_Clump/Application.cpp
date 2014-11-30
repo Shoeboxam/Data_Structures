@@ -107,7 +107,7 @@ int main(){
 	cout << "Ten values:  ";
 	output_values(randoms_rolled);
 
-	randoms_rolled.rollup(0);
+	//randoms_rolled.rollup(0);
 
 	cout << "Rolled sums: ";
 	output_sums(randoms_rolled);

@@ -29,13 +29,15 @@ public:
 template<typename Type>
 class SimpleLinked_Rollup : public SimpleLinked<DataRollup<Type>> {
 	
+	using SimpleLinked<DataRollup<Type>>::insert;
+	using SimpleLinked<DataRollup<Type>>::remove;
 
 public:
 	bool rollup(int index);
 	SimpleLinked_Rollup(){}
 
-	virtual bool insert(Type value, int index);
-	virtual bool remove(int index);
+	bool insert(Type value, int index);
+	bool remove(int index);
 
 	Type get_sum(int index);
 };
