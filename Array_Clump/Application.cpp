@@ -101,7 +101,7 @@ int main(){
 	SimpleLinked_Rollup<float> randoms_rolled;
 
 	for (int i = 0; i < 10; i++){
-		randoms_rolled.push_front(generateValue(0, 100));
+		randoms_rolled.push_back(generateValue(0, 100));
 	}
 
 	cout << "Ten values:  ";

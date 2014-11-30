@@ -2,7 +2,6 @@
 #define SIMPLELINKED_ROLLUP_H
 
 #include "SimpleLinked.h"
-#include <iostream>
 
 template<typename Type>
 class DataRollup {
@@ -29,10 +28,17 @@ public:
 template<typename Type>
 class SimpleLinked_Rollup : public SimpleLinked<DataRollup<Type>> {
 	
-	using SimpleLinked<DataRollup<Type>>::insert;
-	using SimpleLinked<DataRollup<Type>>::remove;
+	SimpleLinked<DataRollup<Type>>::insert;
+	SimpleLinked<DataRollup<Type>>::remove;
 
 public:
+
+	bool push_back(Type value) { return insert(value, elements); }
+	bool push_front(Type value) { return insert(value, 0); }
+
+	bool pop_back() { return remove(elements - 1); }
+	bool pop_front() { return remove(0); }
+
 	bool rollup(int index);
 	SimpleLinked_Rollup(){}
 
@@ -60,7 +66,6 @@ bool SimpleLinked_Rollup<Type>::rollup(int index){
 
 template<typename Type>
 bool SimpleLinked_Rollup<Type>::insert(Type value, int index){
-	cout << "Test";
 	return (SimpleLinked<DataRollup<Type>>::insert(*new DataRollup<Type>(value), index) && rollup(index));
 }
 
