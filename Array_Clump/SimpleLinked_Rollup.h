@@ -2,14 +2,16 @@
 #define SIMPLELINKED_ROLLUP_H
 
 #include "SimpleLinked.h"
+#include <iostream>
 
+template<typename Type>
 class DataRollup {
 public:
-	float value;
-	float sum;
+	Type value;
+	Type sum;
 
 	DataRollup(){}
-	DataRollup(float value_req) : value(value_req), sum(0) {}
+	DataRollup(float value_req) : value(value_req), sum(value_req) {}
 
 	bool operator<(DataRollup& input){
 		return value < input.value;
@@ -25,57 +27,49 @@ public:
 };
 
 template<typename Type>
-class SimpleLinked_Rollup : public SimpleLinked<DataRollup> {
+class SimpleLinked_Rollup : public SimpleLinked<DataRollup<Type>> {
 	
-	void rollup(int index);
 
 public:
+	bool rollup(int index);
+	SimpleLinked_Rollup(){}
 
-	template<typename Type>
-	bool insert(Type value, int index);
+	virtual bool insert(Type value, int index);
+	virtual bool remove(int index);
 
-	template<typename Type>
-	bool remove(int index);
-
-	template<typename Type>
 	Type get_sum(int index);
 };
 
 
 template<typename Type>
-void rollup(int index){
-	set_placer(index - (index > 0));
-
-	Type sum_last;
+bool SimpleLinked_Rollup<Type>::rollup(int index){
+	Type sum_last = 0;
 	bool loop_continue;
 
-	do {
-		sum_last = node_placer->sum;
-		loop_continue = increment_placer();
-		node_placer->sum = sum_last + node_placer->value;
-	} while (loop_continue);
-}
-
-template<typename Type>
-bool insert(Type value, int index){
-	bool success = SimpleLinked<Type>::insert(value, index);
-	rollup(index);
-
-	return success;
-}
-
-template<typename Type>
-bool remove(int index){
-	bool success = SimpleLinked<Type>::insert(index);
-	rollup(index);
-
-	return success;
-}
-
-template<typename Type>
-Type get_sum(int index){
 	set_placer(index);
-	return node_placer->sum;
+	if (index != 0) sum_last = get(index - 1).sum;
+
+	do {
+		node_placer->value.sum = sum_last + node_placer->value.value;
+		sum_last = node_placer->value.sum;
+	} while (increment_placer());
+	return true;
+}
+
+template<typename Type>
+bool SimpleLinked_Rollup<Type>::insert(Type value, int index){
+	cout << "Test";
+	return (SimpleLinked<DataRollup<Type>>::insert(*new DataRollup<Type>(value), index) && rollup(index));
+}
+
+template<typename Type>
+bool SimpleLinked_Rollup<Type>::remove(int index){
+	return (SimpleLinked<DataRollup<Type>>::remove(index) && rollup(index));
+}
+
+template<typename Type>
+Type SimpleLinked_Rollup<Type>::get_sum(int index){
+	return get(index)->value.sum;
 }
 
 #endif

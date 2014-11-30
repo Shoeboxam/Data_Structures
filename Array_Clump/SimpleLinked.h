@@ -2,6 +2,7 @@
 #define SimpleLinked_H
 
 #include "Access_API.h"
+#include <iostream>
 
 template<typename Type>
 class SimpleLinked : public Access_API<Type> {
@@ -14,7 +15,6 @@ class SimpleLinked : public Access_API<Type> {
 
 		Node(){ next = nullptr; }
 		Node(const Type& input){ value = input; next = nullptr; }
-		~Node(){ }
 
 		ostream& operator<<(ostream& out_stream){
 			return out_stream << value;
@@ -24,6 +24,7 @@ class SimpleLinked : public Access_API<Type> {
 	Node<Type>* element_first = new Node<Type>;
 	Node<Type>* element_last = new Node<Type>;
 
+protected:
 	Node<Type>* node_placer;
 
 
@@ -41,8 +42,8 @@ public:
 	Type get_placer() { return node_placer->value; }
 	bool increment_placer();
 
-	bool insert(Type value, int index);
-	bool remove(int index);
+	virtual bool insert(Type value, int index);
+	virtual bool remove(int index);
 
 	void fill(Type);
 	void clear();

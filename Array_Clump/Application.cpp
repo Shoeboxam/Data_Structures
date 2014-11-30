@@ -23,15 +23,14 @@ void output(Type& input){
 	cout << endl;
 }
 
-void output_values(SimpleLinked_Rollup<DataRollup>& input){
+void output_values(SimpleLinked_Rollup<float>& input){
 	for (int i = 0; i < input.get_elements(); i++){
-		cout << input.get(i) << " ";
+		cout << input.get(i).value << " ";
 	}
 	cout << endl;
 }
 
-template<typename Type>
-void output_sums(Type& input){
+void output_sums(SimpleLinked_Rollup<float>& input){
 	for (int i = 0; i < input.get_elements(); i++){
 		cout << input.get(i).sum << " ";
 	}
@@ -99,14 +98,16 @@ int main(){
 	cout << "__       Rollup       __" << endl << endl;
 
 
-	SimpleLinked_Rollup<DataRollup> randoms_rolled;
+	SimpleLinked_Rollup<float> randoms_rolled;
 
 	for (int i = 0; i < 10; i++){
-		randoms_rolled.push_back(*new DataRollup(generateValue(0, 100)));
+		randoms_rolled.push_front(generateValue(0, 100));
 	}
 
 	cout << "Ten values:  ";
 	output_values(randoms_rolled);
+
+	randoms_rolled.rollup(0);
 
 	cout << "Rolled sums: ";
 	output_sums(randoms_rolled);
