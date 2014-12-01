@@ -120,6 +120,7 @@ int main(){
 
 
 	SimpleLinked_Vendor vendor_list;
+	vendor_list.build_list("Vendor List File.txt");
 	cout << vendor_list;
 
 	system("pause");

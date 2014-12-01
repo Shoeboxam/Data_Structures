@@ -4,6 +4,8 @@
 
 #include "SimpleLinked.h" //Same file from part B
 #include <iostream>
+using std::cout;
+using std::endl;
 #include <fstream>
 
 #include <string>
@@ -15,8 +17,11 @@ struct Vendor {
 
 	Vendor(){}
 
-	int _ID;
-	string _name, _city, _state, _zip;
+	Vendor(vector<string> input){
+		set(input);
+	}
+
+	string _ID, _name, _city, _state, _zip;
 
 	bool operator<(Vendor& input){
 		return _ID < input._ID;
@@ -38,15 +43,11 @@ struct Vendor {
 	}
 
 	void set(vector<string>& input){ 
-		_ID = stoi(input[0]);
+		_ID = input[0];
 		_name = input[1]; 
 		_city = input[2];
 		_state = input[3];
 		_zip = input[4];
-	}
-
-	Vendor(vector<string> input){
-		set(input);
 	}
 
 	//bool set_ID(string ID){ _ID = stoi(ID); }
@@ -69,7 +70,7 @@ class IndexNode : public SimpleLinked<Vendor> {
 public:
 	string _state_IndexNode;
 
-	IndexNode(){}
+	IndexNode() : SimpleLinked(){}
 
 	IndexNode(string state){ _state_IndexNode = state; }
 
@@ -110,7 +111,7 @@ class SimpleLinked_Vendor : public SimpleLinked<IndexNode> {
 
 public:
 
-	SimpleLinked_Vendor(){}
+	SimpleLinked_Vendor() : SimpleLinked(){}
 
 	bool add_vendor(Vendor& input);
 	bool build_list(string filename);
@@ -153,13 +154,15 @@ bool SimpleLinked_Vendor::add_vendor(Vendor& input){
 
 bool SimpleLinked_Vendor::build_list(string filename){
 	string line;
-
-	vector<string> prepare_line(string input);
-
 	std::ifstream file_input;
-	file_input.open(filename);
 
+	file_input.open(filename);
 	if (file_input.is_open()){
+
+		getline(file_input, line);
+		getline(file_input, line);
+		getline(file_input, line);
+
 		while (!file_input.eof()){
 			vector<string> delimited;
 
@@ -170,6 +173,8 @@ bool SimpleLinked_Vendor::build_list(string filename){
 			delimited.push_back(line.substr(45, 60));
 			delimited.push_back(line.substr(62, 72));
 			delimited.push_back(line.substr(74, 79));
+
+			cout << line << endl;
 
 			node_placer->value.insert(*new Vendor(delimited));
 		}

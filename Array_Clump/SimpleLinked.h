@@ -21,7 +21,6 @@ protected:
 		}
 	};
 
-protected:
 	Node<Type>* element_first = new Node<Type>;
 	Node<Type>* element_last = new Node<Type>;
 
