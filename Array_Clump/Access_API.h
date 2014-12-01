@@ -1,7 +1,6 @@
 #ifndef ACCESS_H
 #define ACCESS_H
 
-
 template<typename Type>
 class Access_API {
 protected:

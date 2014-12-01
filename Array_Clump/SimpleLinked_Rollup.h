@@ -1,7 +1,7 @@
 #ifndef SIMPLELINKED_ROLLUP_H
 #define SIMPLELINKED_ROLLUP_H
 
-#include "SimpleLinked.h"
+#include "SimpleLinked.h" //Same file from part B
 
 template<typename Type>
 class DataRollup {
@@ -32,6 +32,7 @@ class SimpleLinked_Rollup : public SimpleLinked<DataRollup<Type>> {
 	SimpleLinked<DataRollup<Type>>::remove;
 
 public:
+
 
 	bool push_back(Type value) { return insert(value, elements); }
 	bool push_front(Type value) { return insert(value, 0); }

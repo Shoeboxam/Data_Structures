@@ -35,5 +35,16 @@
     <ClInclude Include="SimpleLinked_Rollup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SimpleLinked_Vendor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleLinked_Sorted.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Vendor List File.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

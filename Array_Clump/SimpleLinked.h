@@ -1,12 +1,12 @@
 #ifndef SimpleLinked_H
 #define SimpleLinked_H
 
-#include "Access_API.h"
+#include "Access_API.h" //Same file from part A
 #include <iostream>
 
 template<typename Type>
 class SimpleLinked : public Access_API<Type> {
-
+protected:
 	template<typename Type>
 	class Node {
 	public:
@@ -14,17 +14,17 @@ class SimpleLinked : public Access_API<Type> {
 		Node<Type>* next;
 
 		Node(){ next = nullptr; }
-		Node(const Type& input){ value = input; next = nullptr; }
+		Node(Type& input){ value = input; next = nullptr; }
 
 		ostream& operator<<(ostream& out_stream){
 			return out_stream << value;
 		}
 	};
 
+protected:
 	Node<Type>* element_first = new Node<Type>;
 	Node<Type>* element_last = new Node<Type>;
 
-protected:
 	Node<Type>* node_placer;
 
 
@@ -42,6 +42,7 @@ public:
 	Type get_placer() { return node_placer->value; }
 	bool increment_placer();
 
+	bool insert(Type value);
 	bool insert(Type value, int index);
 	bool remove(int index);
 
@@ -85,6 +86,17 @@ Type SimpleLinked<Type>::get(int index) const{
 		element_current = element_current->next;
 	}
 	return element_current->value;
+}
+
+template<typename Type>
+bool SimpleLinked<Type>::insert(Type value){
+	int index = 0;
+
+	//Simply overwrites the index with where it would be sorted
+	set_placer(0);
+	while (node_placer->value < value) increment_placer(), index++;
+
+	return insert(value, index);
 }
 
 template<typename Type>

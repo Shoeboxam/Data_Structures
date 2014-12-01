@@ -9,6 +9,7 @@ using std::ostream;
 #include "SimpleVector.h"
 #include "SimpleLinked.h"
 #include "SimpleLinked_Rollup.h"
+#include "SimpleLinked_Vendor.h"
 
 
 int generateValue(int min, int max){
@@ -113,6 +114,13 @@ int main(){
 	output_sums(randoms_rolled);
 
 	cout << endl;
+
+	cout << "------------------------" << endl;
+	cout << "__     Vendor List    __" << endl << endl;
+
+
+	SimpleLinked_Vendor vendor_list;
+	cout << vendor_list;
 
 	system("pause");
 	return 0;

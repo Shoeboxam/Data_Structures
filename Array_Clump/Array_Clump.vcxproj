@@ -82,8 +82,13 @@
     <ClInclude Include="Access_API.h" />
     <ClInclude Include="SimpleLinked.h" />
     <ClInclude Include="SimpleLinked_Rollup.h" />
+    <ClInclude Include="SimpleLinked_Sorted.h" />
+    <ClInclude Include="SimpleLinked_Vendor.h" />
     <ClInclude Include="SimpleVector.h" />
     <ClInclude Include="SimpleVector_Sorted.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Vendor List File.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

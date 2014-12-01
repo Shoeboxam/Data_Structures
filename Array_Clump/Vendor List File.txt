@@ -1,0 +1,126 @@
+
+
+VendorID    Vendor Name                      Vendor City      VendorState VendorZipCode
+----------- -------------------------------- ---------------- ----------- --------------------
+1           US Postal Service                Madison          WI          53707
+2           National Information Data Ctr    Washington       DC          20090
+3           Register of Copyrights           Washington       DC          20559
+4           Jobtrak                          Los Angeles      CA          90025
+5           Newbrige Book Clubs              Washington       NJ          07882
+6           California Chamber Of Commerce   Sacramento       CA          95827
+7           Towne Advertiser's Mailing Svcs  Santa Ana        CA          92704
+8           BFI Industries                   Fresno           CA          93792
+9           Pacific Gas & Electric           San Francisco    CA          94152
+10          Robbins Mobile Lock And Key      Fresno           CA          93726
+11          Bill Marvin Electric Inc         Fresno           CA          93703
+12          City Of Fresno                   Fresno           CA          93718
+13          Golden Eagle Insurance Co        San Diego        CA          92186
+14          Expedata Inc                     Fresno           CA          93726
+15          ASC Signs                        Fresno           CA          93703
+16          Internal Revenue Service         Fresno           CA          93888
+17          Blanchard & Johnson Associates   Mission Viejo    CA          92691
+18          Fresno Photoengraving Company    Fresno           CA          93718
+19          Crown Printing                   Fresno           CA          93721
+20          Diversified Printing & Pub       Brea             CA          92621
+21          The Library Ltd                  St Louis         MO          63105
+22          Micro Center                     Columbus         OH          43221
+23          Yale Industrial Trucks-Fresno    Fresno           CA          93706
+24          Zee Medical Service Co           Washington       IA          52353
+25          California Data Marketing        Fresno           CA          93721
+26          Small Press                      Traverse City    MI          49684
+27          Rich Advertising                 Fairfield        NJ          07004
+29          Vision Envelope & Printing       Gardena          CA          90247
+30          Costco                           Fresno           CA          93711
+31          Enterprise Communications Inc    Mclean           VA          22101
+32          RR Bowker                        East Brunswick   NJ          08810
+33          Nielson                          Cincinnati       OH          45264
+34          IBM                              San Francisco    CA          94161
+35          Cal State Termite                Selma            CA          93662
+36          Graylift                         Fresno           CA          93745
+37          Blue Cross                       Oxnard           CA          93031
+38          Venture Communications Int'l     New York         NY          10010
+39          Custom Printing Company          St Louis         MO          63177
+40          Nat Assoc of College Stores      Oberlin          OH          44074
+41          Shields Design                   Fresno           CA          93728
+42          Opamp Technical Books            Los Angeles      CA          90038
+43          Capital Resource Credit          Minneapolis      MN          55439
+44          Courier Companies, Inc           Boston           MA          02206
+45          Naylor Publications Inc          Jacksonville     FL          32231
+46          Open Horizons Publishing         Fairfield        IA          52556
+47          Baker & Taylor Books             Charlotte        NC          28217
+48          Fresno County Tax Collector      Fresno           CA          93715
+49          Mcgraw Hill Companies            Chicago          IL          60680
+50          Publishers Weekly                Marion           OH          43305
+51          Blue Shield of California        Anaheim          CA          92850
+52          Aztek Label                      Anaheim          CA          92807
+53          Gary McKeighan Insurance         Fresno           CA          93711
+54          Ph Photographic Services         Fresno           CA          93726
+55          Quality Education Data           Chicago          IL          60694
+56          Springhouse Corp                 Philadelphia     PA          19170
+57          The Windows Deck                 Santa Barbara    CA          93101
+58          Fresno Rack & Shelving Inc       Fresno           CA          93722
+59          Publishers Marketing Assoc       Manhatttan Beach CA          90266
+60          The Mailers Guide Co             New Rochelle     NY          10802
+61          American Booksellers Assoc       Tarrytown        NY          10591
+62          Cmg Information Services         Boston           MA          02107
+63          Lou Gentile's Flower Basket      Fresno           CA          93728
+64          Texaco                           Inglewood        CA          90312
+65          The Drawing Board                Carol Stream     IL          60197
+66          Ascom Hasler Mailing Systems     Shelton          CT          06484
+67          Bill Jones                       Sacramento       CA          94244
+68          Computer Library                 Phoenix          AZ          85023
+69          Frank E Wilber Co                Fresno           CA          93727
+70          Fresno Credit Bureau             Fresno           CA          93714
+71          The Fresno Bee                   Fresno           CA          93786
+72          Data Reproductions Corp          Auburn Hills     MI          48326
+73          Executive Office Products        Fresno           CA          93710
+74          Leslie Company                   Olathe           KS          66061
+75          Retirement Plan Consultants      Fresno           CA          93704
+76          Simon Direct Inc                 East Brunswick   NJ          08816
+77          State Board Of Equalization      Sacramento       CA          94208
+78          The Presort Center               Fresno           CA          93706
+79          Valprint                         Fresno           CA          93777
+80          Cardinal Business Media, Inc.    Philadelphia     PA          19170
+81          Wang Laboratories, Inc.          Pasadena         CA          91185
+82          Reiter's Scientific & Pro Books  Washington       DC          20006
+83          Ingram                           Dallas           TX          75284
+84          Boucher Communications Inc       Fort Washington  PA          19034
+85          Champion Printing Company        Cincinnati       OH          45225
+86          Computerworld                    San Francisco    CA          94161
+87          DMV Renewal                      Sacramento       CA          94294
+88          Edward Data Services             Cleves           OH          45002
+89          Evans Executone Inc              Turlock          CA          95380
+90          Wakefield Co                     Fresno           CA          93711
+91          McKesson Water Products          Pasadena         CA          91109
+92          Zip Print & Copy Center          Fresno           CA          93777
+93          AT&T                             Phoenix          AZ          85062
+94          Abbey Office Furnishings         Fresno           CA          93722
+95          Pacific Bell                     Sacramento       CA          95887
+96          Wells Fargo Bank                 Phoenix          AZ          85038
+97          Compuserve                       Columbus         OH          43260
+98          American Express                 Los Angeles      CA          90096
+99          Bertelsmann Industry Svcs. Inc   Valencia         CA          91355
+100         Cahners Publishing Company       The Lake         NV          89163
+101         California Business Machines     Fresno           CA          93710
+102         Coffee Break Service             Fresno           CA          93714
+103         Dean Witter Reynolds             Boston           MA          02134
+104         Digital Dreamworks               Fresno           CA          93711
+105         Dristas Groom & McCormick        Fresno           CA          93720
+106         Ford Motor Credit Company        Los Angeles      CA          90084
+107         Franchise Tax Board              Sacramento       CA          94257
+108         Gostanian General Building       Fresno           CA          93711
+109         Kent H Landsberg Co              San Francisco    CA          94160
+110         Malloy Lithographing Inc         Ann Arbor        MI          48106
+111         Net Asset, Llc                   Fresno           CA          93721
+112         Office Depot                     Los Angeles      CA          90074
+113         Pollstar                         Fresno           CA          93722
+114         Postmaster                       Fresno           CA          93706
+115         Roadway Package System, Inc      Pasadena         CA          91185
+116         State of California              Sacramento       CA          94230
+117         Suburban Propane                 Fresno           CA          93706
+118         Unocal                           Pasadena         CA          91186
+119         Yesmed, Inc                      Fresno           CA          93718
+120         Dataforms/West                   Fresno           CA          93711
+121         Zylka Design                     Fresno           CA          93711
+122         United Parcel Service            Reno             NV          88905
+123         Federal Express Corporation      Memphis          TN          38101
