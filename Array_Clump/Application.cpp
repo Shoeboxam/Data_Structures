@@ -42,67 +42,14 @@ int main(){
 	//Seed random number generator
 	srand(static_cast<int>(time(NULL)));
 
-	SimpleLinked<int> randoms;
-
-	cout << endl << "Append ten random numbers: " << endl;
-	for (int i = 0; i < 10; i++){
-		randoms.push_back(generateValue(0, 100));
-	}
-	output(randoms);
-
-	cout << endl << "Prepend 785: " << endl;
-	randoms.push_front(785);
-	output(randoms);
-
-	cout << endl << "Subscript accessor [1]: " << randoms[1] << endl;
-
-	cout << endl << "Remove index 2: " << endl;
-	randoms.remove(2);
-	output(randoms);
-
-	cout << endl << "Insert to index 2: " << endl;
-	randoms.insert(41, 2);
-	output(randoms);
-
-	cout << endl << "Front: " << randoms.front() << endl;
-	cout << endl << "Back: " << randoms.back() << endl;
-
-	cout << endl << "Node Placer: " << randoms.get_placer() << endl;
-	SimpleLinked<int> randoms2 = randoms;
-	cout << endl << "SimpleVector == copy constructed SimpleVector?  " << (randoms2==randoms) << endl;
-
-	randoms2.push_back(4);
-	cout << "SimpleVector == modified SimpleVector?   " << (randoms2 == randoms) << endl;
-
-	cout << endl << "Sorted: " << endl;
-	randoms.sort();
-	output(randoms);
-
-	cout << endl << "Const duplicate:" << endl;
-	const SimpleLinked<int> randoms3(randoms);
-	output(randoms3);
-
-	randoms.set_placer(2);
-	cout << endl << "Node Placer: " << randoms.get_placer() << endl;
-	randoms.increment_placer();
-	cout << "Incremented Node Placer: " << randoms.get_placer() << endl;
-
-	cout << endl << "Fill with zeros: " << endl;
-	randoms.fill(0);
-	output(randoms);
-
-	cout << endl << "Clear: " << endl;
-	randoms.clear();
-	output(randoms);
-
 	cout << "------------------------" << endl;
 	cout << "__       Rollup       __" << endl << endl;
 
 
 	SimpleLinked_Rollup<float> randoms_rolled;
 
-	for (int i = 0; i < 10; i++){
-		randoms_rolled.push_back(generateValue(0, 100));
+	for (int i = 0; i < 20; i++){
+		randoms_rolled.push_back(generateValue(0, 50));
 	}
 
 	cout << "Ten values:  ";

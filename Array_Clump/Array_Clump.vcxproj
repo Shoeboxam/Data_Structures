@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Access_API.h" />
+    <ClInclude Include="Analysis.h" />
     <ClInclude Include="SimpleLinked.h" />
     <ClInclude Include="SimpleLinked_Rollup.h" />
     <ClInclude Include="SimpleLinked_Sorted.h" />

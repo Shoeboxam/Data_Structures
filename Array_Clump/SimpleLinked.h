@@ -45,6 +45,8 @@ public:
 	bool insert(Type value, int index);
 	bool remove(int index);
 
+	void print();
+
 	void fill(Type);
 	void clear();
 
@@ -200,6 +202,20 @@ bool SimpleLinked<Type>::increment_placer(){
 
 	node_placer = node_placer->next;
 	return true;
+}
+
+template<typename Type>
+void SimpleLinked<Type>::print(){
+	int i = 0;
+	set_placer(0);
+	do {
+		cout << node_placer->value << " ";
+
+		if (i == 10){
+			cout << endl;
+			i = 0;
+		}
+	}
 }
 
 

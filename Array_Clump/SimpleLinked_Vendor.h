@@ -162,6 +162,7 @@ bool SimpleLinked_Vendor::build_list(string filename){
 		getline(file_input, line);
 		getline(file_input, line);
 		getline(file_input, line);
+		getline(file_input, line);
 
 		while (!file_input.eof()){
 			vector<string> delimited;

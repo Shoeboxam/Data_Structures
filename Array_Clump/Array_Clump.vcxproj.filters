@@ -41,6 +41,9 @@
     <ClInclude Include="SimpleLinked_Sorted.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Analysis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Vendor List File.txt">

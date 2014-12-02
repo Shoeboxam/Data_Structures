@@ -3,7 +3,6 @@
 
 template<typename Type>
 class Access_API {
-protected:
 public:
 	int elements;
 
