@@ -68,7 +68,8 @@ int main(){
 
 	SimpleLinked_Vendor vendor_list;
 	vendor_list.build_list("Vendor List File.txt");
-	cout << vendor_list;
+	cout << "City: ";
+	cout << vendor_list.get(2).get(0)._city;
 
 	system("pause");
 	return 0;

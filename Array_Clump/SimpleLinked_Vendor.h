@@ -72,7 +72,7 @@ public:
 
 	IndexNode() : SimpleLinked(){}
 
-	IndexNode(string state){ _state_IndexNode = state; }
+	IndexNode(string state) : SimpleLinked() { _state_IndexNode = state; }
 
 	friend bool operator<(IndexNode& base, IndexNode& input){
 		return base._state_IndexNode < input._state_IndexNode;
@@ -84,10 +84,10 @@ public:
 
 	void operator=(IndexNode& input){
 		clear();
-		set_placer(0);
+		input.set_placer(0);
 		do {
-			insert(input.node_placer->value);
-		} while (increment_placer());
+			push_back(input.node_placer->value);
+		} while (input.increment_placer());
 	}
 
 	friend ostream& operator<<(ostream& base, IndexNode& input){
@@ -138,14 +138,12 @@ bool SimpleLinked_Vendor::add_vendor(Vendor& input){
 			match = true;
 		}
 	} while (increment_placer() && !match);
-
 	if (!match){
 		insert(*new IndexNode(input._state));
 	}
-
 	//Set node pointer to correct index node
 	set_placer(0);
-	while (input._state != node_placer->value._state_IndexNode && increment_placer()) {}
+	while (input._state != node_placer->value._state_IndexNode && increment_placer()) { }
 
 	node_placer->value.insert(input);
 
@@ -168,16 +166,18 @@ bool SimpleLinked_Vendor::build_list(string filename){
 			vector<string> delimited;
 
 			getline(file_input, line);
+			cout << line << endl;
+			if (line.size() < 75) return false;
 
 			delimited.push_back(line.substr(0, 10));
-			delimited.push_back(line.substr(12, 43));
-			delimited.push_back(line.substr(45, 60));
-			delimited.push_back(line.substr(62, 72));
-			delimited.push_back(line.substr(74, 79));
+			delimited.push_back(line.substr(12, 31));
+			delimited.push_back(line.substr(45, 15));
+			delimited.push_back(line.substr(62, 10));
+			delimited.push_back(line.substr(74, 5));
 
-			cout << line << endl;
-
-			node_placer->value.insert(*new Vendor(delimited));
+			Vendor buffer = *new Vendor(delimited);
+			cout << buffer;
+			add_vendor(*new Vendor(delimited));
 		}
 	}
 

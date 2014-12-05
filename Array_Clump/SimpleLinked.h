@@ -90,14 +90,17 @@ Type SimpleLinked<Type>::get(int index) const{
 }
 
 template<typename Type>
-bool SimpleLinked<Type>::insert(Type value){
+bool SimpleLinked<Type>::insert(Type input){
 	int index = 0;
 
 	//Simply overwrites the index with where it would be sorted
 	set_placer(0);
-	while (node_placer->value < value) increment_placer(), index++;
+	while (node_placer->value > input) {
+		increment_placer();
+		index++;
+	}
 
-	return insert(value, index);
+	return insert(input, index);
 }
 
 template<typename Type>
