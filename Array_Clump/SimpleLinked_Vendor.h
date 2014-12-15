@@ -14,14 +14,14 @@ using std::string;
 using std::vector;
 
 struct Vendor {
-
 	Vendor(){}
 
 	Vendor(vector<string> input){
 		set(input);
 	}
 
-	string _ID, _name, _city, _state, _zip;
+	int _ID;
+	string _name, _city, _state, _zip;
 
 	bool operator<(Vendor& input){
 		return _ID < input._ID;
@@ -32,47 +32,31 @@ struct Vendor {
 	}
 
 	friend ostream& operator<<(ostream& base, Vendor& input){
-		base << endl
-			<< " --------------------" << endl
-			<< " ID    " << input._ID << endl
-			<< " Name  " << input._name << endl
-			<< " City  " << input._city << endl
-			<< " State " << input._state << endl
-			<< " Zip   " << input._zip << endl;
+		cout << " " << input._name 
+			<< " at " << input._city << " " << input._state << " " << input._zip << endl;
 		return base;
 	}
 
 	void set(vector<string>& input){ 
-		_ID = input[0];
+		_ID = std::stoi(input[0]);
 		_name = input[1]; 
 		_city = input[2];
 		_state = input[3];
 		_zip = input[4];
 	}
-
-	//bool set_ID(string ID){ _ID = stoi(ID); }
-
-	//void set_ID(int ID){ _ID = ID; }
-	//void set_name(string name){ _name = name; }
-	//void set_city(string city){ _city = city; }
-	//void set_state(string state){ _state = state; }
-	//void set_zip(string zip){ _zip = zip; }
-
-	//int get_ID(){ return _ID; }
-	//string get_name(){ return _name; }
-	//string get_city(){ return _city; }
-	//string get_state(){ return _state; }
-	//string get_zip(){ return _zip; }
 };
 
 
 class IndexNode : public SimpleLinked<Vendor> {
 public:
-	string _state_IndexNode;
+	string _state_IndexNode = "NA";
 
 	IndexNode() : SimpleLinked(){}
 
-	IndexNode(string state) : SimpleLinked() { _state_IndexNode = state; }
+	IndexNode(string state) : SimpleLinked() { 
+		_state_IndexNode = state; 
+		cout << "Created State Node: " << _state_IndexNode << endl;
+	}
 
 	friend bool operator<(IndexNode& base, IndexNode& input){
 		return base._state_IndexNode < input._state_IndexNode;
@@ -91,10 +75,12 @@ public:
 	}
 
 	friend ostream& operator<<(ostream& base, IndexNode& input){
-
+		base << endl << "STATE " << input._state_IndexNode << endl;
 		input.set_placer(0);
 		do {
-			base << input.node_placer->value;
+			if (input.node_placer->value._ID >= 0){
+				base << input.node_placer->value;
+			}
 		} while (input.increment_placer());
 
 		return base;
@@ -105,9 +91,6 @@ public:
 class SimpleLinked_Vendor : public SimpleLinked<IndexNode> {
 	//Hide inherited insert
 	SimpleLinked<IndexNode>::insert;
-	bool add_state(IndexNode value){
-		SimpleLinked<IndexNode>::insert(value);
-	}
 
 public:
 
@@ -119,29 +102,33 @@ public:
 
 
 	friend ostream& operator<<(ostream& base, SimpleLinked_Vendor& input){
-
 		input.set_placer(0);
 		do {
 			base << input.node_placer->value;
 		} while (input.increment_placer());
-
 		return base;
 	}
 };
 
 bool SimpleLinked_Vendor::add_vendor(Vendor& input){
-	set_placer(0);
 
 	bool match = false;
-	do {
-		if (node_placer->value._state_IndexNode == input._state){
-			match = true;
-		}
-	} while (increment_placer() && !match);
-	if (!match){
-		insert(*new IndexNode(input._state));
+
+	set_placer(0);
+	if (elements != 0){
+		do {
+			if (node_placer->value._state_IndexNode == input._state){
+				match = true;
+			}
+		} while (increment_placer() && !match);
 	}
-	//Set node pointer to correct index node
+
+	if (!match){
+		insert(*new IndexNode());
+	}
+	node_placer->value._state_IndexNode = input._state;
+
+	//Set node placer to correct index node
 	set_placer(0);
 	while (input._state != node_placer->value._state_IndexNode && increment_placer()) { }
 
@@ -166,17 +153,14 @@ bool SimpleLinked_Vendor::build_list(string filename){
 			vector<string> delimited;
 
 			getline(file_input, line);
-			cout << line << endl;
 			if (line.size() < 75) return false;
 
 			delimited.push_back(line.substr(0, 10));
 			delimited.push_back(line.substr(12, 31));
-			delimited.push_back(line.substr(45, 15));
-			delimited.push_back(line.substr(62, 10));
+			delimited.push_back(line.substr(45, 16));
+			delimited.push_back(line.substr(62, 2));
 			delimited.push_back(line.substr(74, 5));
 
-			Vendor buffer = *new Vendor(delimited);
-			cout << buffer;
 			add_vendor(*new Vendor(delimited));
 		}
 	}

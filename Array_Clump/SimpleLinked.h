@@ -95,8 +95,7 @@ bool SimpleLinked<Type>::insert(Type input){
 
 	//Simply overwrites the index with where it would be sorted
 	set_placer(0);
-	while (node_placer->value > input) {
-		increment_placer();
+	while (node_placer->value > input && increment_placer()) {
 		index++;
 	}
 
